@@ -1,0 +1,20 @@
+[project]
+name = "alt-sqlalchemy-m1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sqlalchemy>=2.0,<2.1",
+]
+
+# Setup guard: this subproject is intentionally NOT part of any parent uv
+# workspace. An empty members list makes this directory its own workspace root
+# so `uv` never walks up into /Users/kanade0404/work/python-sandbox.
+[tool.uv.workspace]
+members = []
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+]

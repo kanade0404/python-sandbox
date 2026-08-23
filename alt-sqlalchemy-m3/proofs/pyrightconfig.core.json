@@ -1,0 +1,8 @@
+{
+  "include": ["../altsa_sqlgen", "../corpus", "../tests"],
+  "extraPaths": [".."],
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "reportMissingTypeStubs": "error",
+  "reportUnnecessaryTypeIgnoreComment": "error"
+}

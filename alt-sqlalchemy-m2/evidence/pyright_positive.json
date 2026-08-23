@@ -1,0 +1,1154 @@
+{
+    "version": "1.1.411",
+    "time": "1787456909871",
+    "generalDiagnostics": [
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.status.eq(OrderStatus.PAID)\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 57,
+                    "character": 16
+                },
+                "end": {
+                    "line": 57,
+                    "character": 50
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.total.eq(ORDER_ITEMS.unit_price)\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 61,
+                    "character": 16
+                },
+                "end": {
+                    "line": 61,
+                    "character": 55
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.total.gte(Decimal(\"10.00\"))\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 64,
+                    "character": 16
+                },
+                "end": {
+                    "line": 64,
+                    "character": 50
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.version.eq(3)\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 65,
+                    "character": 16
+                },
+                "end": {
+                    "line": 65,
+                    "character": 36
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.created_at.lt(_dt.datetime(2026, 1, 1))\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 66,
+                    "character": 16
+                },
+                "end": {
+                    "line": 66,
+                    "character": 62
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.status.in_([OrderStatus.PAID, OrderStatus.SHIPPED])\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 69,
+                    "character": 16
+                },
+                "end": {
+                    "line": 69,
+                    "character": 74
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q.users.status.eq(UserStatus.ACTIVE)\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 73,
+                    "character": 16
+                },
+                "end": {
+                    "line": 73,
+                    "character": 52
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.total.mul(3)\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 84,
+                    "character": 16
+                },
+                "end": {
+                    "line": 84,
+                    "character": 35
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.total.add(Decimal(\"1.50\"))\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 85,
+                    "character": 16
+                },
+                "end": {
+                    "line": 85,
+                    "character": 49
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.total.sub(1)\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 86,
+                    "character": 16
+                },
+                "end": {
+                    "line": 86,
+                    "character": 35
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.version.mul(2)\" is \"Expr[int]\"",
+            "range": {
+                "start": {
+                    "line": 89,
+                    "character": 16
+                },
+                "end": {
+                    "line": 89,
+                    "character": 37
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.total.mul(ORDER_ITEMS.unit_price)\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 92,
+                    "character": 16
+                },
+                "end": {
+                    "line": 92,
+                    "character": 56
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDER_ITEMS.unit_price.mul(ORDER_ITEMS.quantity)\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 99,
+                    "character": 16
+                },
+                "end": {
+                    "line": 99,
+                    "character": 64
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDER_ITEMS.quantity.mul(3)\" is \"Expr[int]\"",
+            "range": {
+                "start": {
+                    "line": 100,
+                    "character": 16
+                },
+                "end": {
+                    "line": 100,
+                    "character": 43
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"base\" is \"QOrders\"",
+            "range": {
+                "start": {
+                    "line": 110,
+                    "character": 16
+                },
+                "end": {
+                    "line": 110,
+                    "character": 20
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ln\" is \"QOrdersUsersN\"",
+            "range": {
+                "start": {
+                    "line": 114,
+                    "character": 16
+                },
+                "end": {
+                    "line": 114,
+                    "character": 18
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ln.users.email\" is \"Col[Literal['users'], str | None]\"",
+            "range": {
+                "start": {
+                    "line": 115,
+                    "character": 16
+                },
+                "end": {
+                    "line": 115,
+                    "character": 30
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ln.users.id\" is \"Col[Literal['users'], UUID | None]\"",
+            "range": {
+                "start": {
+                    "line": 116,
+                    "character": 16
+                },
+                "end": {
+                    "line": 116,
+                    "character": 27
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"sel_n\" is \"Select[UUID, str | None]\"",
+            "range": {
+                "start": {
+                    "line": 120,
+                    "character": 16
+                },
+                "end": {
+                    "line": 120,
+                    "character": 21
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"li\" is \"QOrdersUsersI\"",
+            "range": {
+                "start": {
+                    "line": 124,
+                    "character": 16
+                },
+                "end": {
+                    "line": 124,
+                    "character": 18
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"li.users.email\" is \"Col[Literal['users'], str]\"",
+            "range": {
+                "start": {
+                    "line": 125,
+                    "character": 16
+                },
+                "end": {
+                    "line": 125,
+                    "character": 30
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"sel_i\" is \"Select[UUID, str]\"",
+            "range": {
+                "start": {
+                    "line": 127,
+                    "character": 16
+                },
+                "end": {
+                    "line": 127,
+                    "character": 21
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ln.where(ORDERS.status.eq(OrderStatus.PAID))\" is \"QOrdersUsersN\"",
+            "range": {
+                "start": {
+                    "line": 130,
+                    "character": 16
+                },
+                "end": {
+                    "line": 130,
+                    "character": 60
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"mixed\" is \"QOrdersUsersIOrderItemsN\"",
+            "range": {
+                "start": {
+                    "line": 134,
+                    "character": 16
+                },
+                "end": {
+                    "line": 134,
+                    "character": 21
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"mixed.users.email\" is \"Col[Literal['users'], str]\"",
+            "range": {
+                "start": {
+                    "line": 135,
+                    "character": 16
+                },
+                "end": {
+                    "line": 135,
+                    "character": 33
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"mixed.order_items.quantity\" is \"NumCol[Literal['order_items'], int | None]\"",
+            "range": {
+                "start": {
+                    "line": 136,
+                    "character": 16
+                },
+                "end": {
+                    "line": 136,
+                    "character": 42
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"chain\" is \"QOrdersOrderItemsNProductsN\"",
+            "range": {
+                "start": {
+                    "line": 141,
+                    "character": 16
+                },
+                "end": {
+                    "line": 141,
+                    "character": 21
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"chain.products.sku\" is \"Col[Literal['products'], str | None]\"",
+            "range": {
+                "start": {
+                    "line": 142,
+                    "character": 16
+                },
+                "end": {
+                    "line": 142,
+                    "character": 34
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"wide\" is \"Select[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, int | None, Decimal | None]\"",
+            "range": {
+                "start": {
+                    "line": 167,
+                    "character": 16
+                },
+                "end": {
+                    "line": 167,
+                    "character": 20
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"rows\" is \"list[tuple[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, int | None, Decimal | None]]\"",
+            "range": {
+                "start": {
+                    "line": 172,
+                    "character": 16
+                },
+                "end": {
+                    "line": 172,
+                    "character": 20
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"first[0]\" is \"UUID\"",
+            "range": {
+                "start": {
+                    "line": 174,
+                    "character": 16
+                },
+                "end": {
+                    "line": 174,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"first[7]\" is \"str | None\"",
+            "range": {
+                "start": {
+                    "line": 175,
+                    "character": 16
+                },
+                "end": {
+                    "line": 175,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"first[11]\" is \"Decimal | None\"",
+            "range": {
+                "start": {
+                    "line": 176,
+                    "character": 16
+                },
+                "end": {
+                    "line": 176,
+                    "character": 25
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"thirteen\" is \"Select[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, UUID | None, int | None, Decimal | None]\"",
+            "range": {
+                "start": {
+                    "line": 194,
+                    "character": 16
+                },
+                "end": {
+                    "line": 194,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"proj\" is \"Projection[OrderSummaryRow]\"",
+            "range": {
+                "start": {
+                    "line": 205,
+                    "character": 16
+                },
+                "end": {
+                    "line": 205,
+                    "character": 20
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"rows\" is \"list[OrderSummaryRow]\"",
+            "range": {
+                "start": {
+                    "line": 209,
+                    "character": 16
+                },
+                "end": {
+                    "line": 209,
+                    "character": 20
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"row.order_id\" is \"UUID\"",
+            "range": {
+                "start": {
+                    "line": 212,
+                    "character": 16
+                },
+                "end": {
+                    "line": 212,
+                    "character": 28
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"row.user_email\" is \"str | None\"",
+            "range": {
+                "start": {
+                    "line": 213,
+                    "character": 16
+                },
+                "end": {
+                    "line": 213,
+                    "character": 30
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"row.total\" is \"Decimal\"",
+            "range": {
+                "start": {
+                    "line": 214,
+                    "character": 16
+                },
+                "end": {
+                    "line": 214,
+                    "character": 25
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"search_orders(OrderFilter())\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 242,
+                    "character": 16
+                },
+                "end": {
+                    "line": 242,
+                    "character": 44
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"all_of()\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 245,
+                    "character": 16
+                },
+                "end": {
+                    "line": 245,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"any_of()\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 246,
+                    "character": 16
+                },
+                "end": {
+                    "line": 246,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"combined\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 256,
+                    "character": 16
+                },
+                "end": {
+                    "line": 256,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q\" is \"QOrdersUsersN\"",
+            "range": {
+                "start": {
+                    "line": 260,
+                    "character": 16
+                },
+                "end": {
+                    "line": 260,
+                    "character": 17
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"all_of(*bag)\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 264,
+                    "character": 16
+                },
+                "end": {
+                    "line": 264,
+                    "character": 28
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"nullable_email\" is \"Col[Literal['users'], str | None]\"",
+            "range": {
+                "start": {
+                    "line": 276,
+                    "character": 16
+                },
+                "end": {
+                    "line": 276,
+                    "character": 30
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"unnulled\" is \"Col[Literal['users'], str]\"",
+            "range": {
+                "start": {
+                    "line": 280,
+                    "character": 16
+                },
+                "end": {
+                    "line": 280,
+                    "character": 24
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q.users.id.not_null()\" is \"Col[Literal['users'], UUID]\"",
+            "range": {
+                "start": {
+                    "line": 283,
+                    "character": 16
+                },
+                "end": {
+                    "line": 283,
+                    "character": 37
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q.users.status.not_null()\" is \"Col[Literal['users'], UserStatus]\"",
+            "range": {
+                "start": {
+                    "line": 284,
+                    "character": 16
+                },
+                "end": {
+                    "line": 284,
+                    "character": 41
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"sel\" is \"Select[UUID, str]\"",
+            "range": {
+                "start": {
+                    "line": 288,
+                    "character": 16
+                },
+                "end": {
+                    "line": 288,
+                    "character": 19
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"unnulled.eq(\"a@b.example\")\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 292,
+                    "character": 16
+                },
+                "end": {
+                    "line": 292,
+                    "character": 42
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"s2.fetch(conn)\" is \"list[tuple[UUID, str | None]]\"",
+            "range": {
+                "start": {
+                    "line": 306,
+                    "character": 16
+                },
+                "end": {
+                    "line": 306,
+                    "character": 30
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"s1.fetch(conn)\" is \"list[tuple[Decimal]]\"",
+            "range": {
+                "start": {
+                    "line": 309,
+                    "character": 16
+                },
+                "end": {
+                    "line": 309,
+                    "character": 30
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"ORDERS.status.eq(OrderStatus.PAID)\" is \"Pred\"",
+            "range": {
+                "start": {
+                    "line": 312,
+                    "character": 16
+                },
+                "end": {
+                    "line": 312,
+                    "character": 50
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q.where(all_of())\" is \"QOrdersUsersN\"",
+            "range": {
+                "start": {
+                    "line": 313,
+                    "character": 16
+                },
+                "end": {
+                    "line": 313,
+                    "character": 33
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"s2.sql(conn)\" is \"str\"",
+            "range": {
+                "start": {
+                    "line": 314,
+                    "character": 16
+                },
+                "end": {
+                    "line": 314,
+                    "character": 28
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"conn.statement_cache_stats()\" is \"tuple[int, int]\"",
+            "range": {
+                "start": {
+                    "line": 315,
+                    "character": 16
+                },
+                "end": {
+                    "line": 315,
+                    "character": 44
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"sel\" is \"Select[UUID, str | None]\"",
+            "range": {
+                "start": {
+                    "line": 319,
+                    "character": 16
+                },
+                "end": {
+                    "line": 319,
+                    "character": 19
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"col\" is \"NumCol[Literal['orders'], Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 321,
+                    "character": 16
+                },
+                "end": {
+                    "line": 321,
+                    "character": 19
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"e\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 323,
+                    "character": 16
+                },
+                "end": {
+                    "line": 323,
+                    "character": 17
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"summary\" is \"list[OrderSummaryRow]\"",
+            "range": {
+                "start": {
+                    "line": 325,
+                    "character": 16
+                },
+                "end": {
+                    "line": 325,
+                    "character": 23
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q\" is \"QUsersOrdersIOrderItemsI\"",
+            "range": {
+                "start": {
+                    "line": 342,
+                    "character": 16
+                },
+                "end": {
+                    "line": 342,
+                    "character": 17
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"revenue\" is \"Expr[Decimal | None]\"",
+            "range": {
+                "start": {
+                    "line": 345,
+                    "character": 16
+                },
+                "end": {
+                    "line": 345,
+                    "character": 23
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"sel\" is \"Select[str, Decimal | None]\"",
+            "range": {
+                "start": {
+                    "line": 350,
+                    "character": 16
+                },
+                "end": {
+                    "line": 350,
+                    "character": 19
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"total\" is \"Expr[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 354,
+                    "character": 16
+                },
+                "end": {
+                    "line": 354,
+                    "character": 21
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q.select(USERS.email, total)\" is \"Select[str, Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 355,
+                    "character": 16
+                },
+                "end": {
+                    "line": 355,
+                    "character": 44
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"q.select(USERS.email, count_star())\" is \"Select[str, int]\"",
+            "range": {
+                "start": {
+                    "line": 357,
+                    "character": 16
+                },
+                "end": {
+                    "line": 357,
+                    "character": 51
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"insert_orders(conn, user_id=uuid4())\" is \"int\"",
+            "range": {
+                "start": {
+                    "line": 372,
+                    "character": 16
+                },
+                "end": {
+                    "line": 372,
+                    "character": 52
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"insert_orders(conn, id=uuid4(), user_id=uuid4(), status=OrderStatus.PENDING, total=Decimal(\"0\"))\" is \"int\"",
+            "range": {
+                "start": {
+                    "line": 374,
+                    "character": 8
+                },
+                "end": {
+                    "line": 380,
+                    "character": 9
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"update_orders(conn, ORDERS.status.set(OrderStatus.PAID), ORDERS.version.set(ORDERS.version.add(1)), where=all_of(ORDERS.id.eq(uuid4()), ORDERS.version.eq(7)))\" is \"int\"",
+            "range": {
+                "start": {
+                    "line": 386,
+                    "character": 8
+                },
+                "end": {
+                    "line": 394,
+                    "character": 9
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"from_orders().left_join_payments()\" is \"QOrdersPaymentsN\"",
+            "range": {
+                "start": {
+                    "line": 406,
+                    "character": 16
+                },
+                "end": {
+                    "line": 406,
+                    "character": 50
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"from_payments().join_orders()\" is \"QPaymentsOrdersI\"",
+            "range": {
+                "start": {
+                    "line": 407,
+                    "character": 16
+                },
+                "end": {
+                    "line": 407,
+                    "character": 45
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"from_products().join_order_items()\" is \"QProductsOrderItemsI\"",
+            "range": {
+                "start": {
+                    "line": 408,
+                    "character": 16
+                },
+                "end": {
+                    "line": 408,
+                    "character": 50
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"from_staff_accounts().join_accounts()\" is \"QStaffAccountsAccountsI\"",
+            "range": {
+                "start": {
+                    "line": 409,
+                    "character": 16
+                },
+                "end": {
+                    "line": 409,
+                    "character": 53
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"from_orders().left_join_users().left_join_order_items()\" is \"QOrdersUsersNOrderItemsN\"",
+            "range": {
+                "start": {
+                    "line": 412,
+                    "character": 16
+                },
+                "end": {
+                    "line": 412,
+                    "character": 71
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m2/proofs/proof_positive.py",
+            "severity": "information",
+            "message": "Type of \"from_orders().join_users().left_join_order_items()\" is \"QOrdersUsersIOrderItemsN\"",
+            "range": {
+                "start": {
+                    "line": 414,
+                    "character": 16
+                },
+                "end": {
+                    "line": 414,
+                    "character": 66
+                }
+            }
+        }
+    ],
+    "summary": {
+        "filesAnalyzed": 11,
+        "errorCount": 0,
+        "warningCount": 0,
+        "informationCount": 76,
+        "timeInSec": 0.542
+    }
+}
+

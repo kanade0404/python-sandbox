@@ -1,0 +1,80 @@
+CORPUS RUNNER -- engine: altsa_sqlgen-phase1
+========================================================================
+
+[SAFE-FALSE-POSITIVE] phase2/aggregate_sum_groupby_notnull_arg
+       0. grp                    expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+     * 1. total                  expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+     * 2. n                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[PASS               ] phase2/aggregate_sum_groupby_nullable_arg
+       0. grp                    expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. total                  expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] phase2/aggregate_sum_no_groupby
+       0. total                  expected=NULL      got=NULL      via=unknown   PASS
+     * 1. n                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       2. hi                     expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] phase2/binary_op_mixed
+     * 0. a                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       1. b                      expected=NULL      got=NULL      via=unknown   PASS
+     * 2. c                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       3. d                      expected=NULL      got=NULL      via=unknown   PASS
+
+[PASS               ] phase2/case_no_else
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. v                      expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] phase2/case_with_else
+     * 0. v                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       1. w                      expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] phase2/cast_preserves
+     * 0. a                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       1. b                      expected=NULL      got=NULL      via=explain   PASS
+     * 2. c                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] phase2/coalesce_chain
+     * 0. a                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+     * 1. b                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       2. c                      expected=NULL      got=NULL      via=unknown   PASS
+
+[PASS               ] phase2/nullif_case
+       0. raw                    expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. v                      expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] phase2/scalar_subquery
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. note                   expected=NULL      got=NULL      via=unknown   PASS
+     * 2. has_n                  expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] phase2/union_nullability
+       0. a                      expected=NULL      got=NULL      via=unknown   PASS
+     * 1. b                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+------------------------------------------------------------------------
+SUMMARY
+
+  cases        : 11 (phase2=11)
+  columns      : 29
+  PASS                : 17
+  SAFE-FALSE-POSITIVE : 12
+  UNSOUND             : 0
+  MISMATCH            : 0
+  ERROR               : 0
+
+SAFE FALSE POSITIVES (12) -- the Phase1 -> Phase2 precision delta:
+  phase2/aggregate_sum_groupby_notnull_arg total                (via unknown)
+  phase2/aggregate_sum_groupby_notnull_arg n                    (via unknown)
+  phase2/aggregate_sum_no_groupby        n                    (via unknown)
+  phase2/binary_op_mixed                 a                    (via unknown)
+  phase2/binary_op_mixed                 c                    (via unknown)
+  phase2/case_with_else                  v                    (via unknown)
+  phase2/cast_preserves                  a                    (via unknown)
+  phase2/cast_preserves                  c                    (via unknown)
+  phase2/coalesce_chain                  a                    (via unknown)
+  phase2/coalesce_chain                  b                    (via unknown)
+  phase2/scalar_subquery                 has_n                (via unknown)
+  phase2/union_nullability               b                    (via unknown)
+
+PASS: 0 unsound, 0 mismatch, 0 error, 12 safe-false-positive

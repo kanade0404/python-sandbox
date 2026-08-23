@@ -1,0 +1,19 @@
+[package]
+name = "altsa-analyze"
+version = "0.1.0"
+edition = "2021"
+description = "Static per-column result nullability analysis for PostgreSQL queries (alt-SQLAlchemy M4, Phase 2 engine)"
+license = "MIT"
+
+[[bin]]
+name = "altsa-analyze"
+path = "src/main.rs"
+
+[dependencies]
+pg_query = "6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+[profile.release]
+opt-level = 2

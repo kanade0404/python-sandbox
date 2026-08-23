@@ -1,0 +1,27 @@
+environment
+  python 3.12.12, sqlalchemy 2.0.52, psycopg 3.3.4
+  macOS laptop, PostgreSQL 16 in Docker on localhost. n=2000 timed iterations after 200 warmup, single process.
+  RELATIVE numbers only.
+
+compile-cache evidence
+  Layer A   1st execution: CACHE_MISS, 2nd: CACHE_HIT, 3rd: CACHE_HIT
+  Layer A   compile-cache HIT on the hot path: YES
+  Core      2nd execution of the prebuilt statement: CACHE_HIT
+
+facade shape-memo evidence (altsa_runtime's own memo, not SQLAlchemy's)
+  over 2200 Layer A calls: +2200 hits, +0 misses
+  memo hit rate on the hot path: 100.00%
+
+variant                       p10 us   median us    p90 us
+------------------------------------------------------------
+a) Layer A facade              160.6       172.8     197.6
+b) SQLAlchemy Core             110.2       118.6     142.7
+c) raw psycopg                  91.0        99.1     124.8
+d) Layer B generated            92.0       100.4     123.9
+e) hand-written psycopg         90.2        98.8     121.6
+
+deltas (medians)
+  Layer A over Core          : +54.3 us  (1.46x)
+  Core over raw psycopg      : +19.4 us  (1.20x)
+  Layer A over raw psycopg   : +73.7 us  (1.74x)
+  Layer B over hand-written  : +1.6 us  (1.02x)

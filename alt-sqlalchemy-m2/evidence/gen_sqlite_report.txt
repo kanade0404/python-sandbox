@@ -1,0 +1,61 @@
+dialect      : sqlite
+tables       : 7
+enums        : 3
+edges        : 10 (10 derived from FKs)
+shapes       : 31 (4 declared multi-edge)
+projections  : 2
+output       : generated/sqlite/facade.py (1185 lines)
+
+tables:
+  accounts(id:int, kind:text, label:text, created_at:text)
+  order_items(order_id:text, product_id:int, quantity:int, unit_price:numeric)
+  orders(id:text, user_id:text, status:enum, version:int, total:numeric, created_at:text)
+  payments(id:int, order_id:text, method:enum, amount:numeric, card_last4:text?, bank_account:text?, wallet_provider:text?, paid_at:text)
+  products(id:int, sku:text, name:text, price:numeric, tags:text?, stock:int)
+  staff_accounts(id:int, employee_no:text, department:text)
+  users(id:text, email:text, status:enum, metadata:text?, created_at:text)
+
+edges:
+  accounts_to_staff_accounts: accounts -> staff_accounts ON accounts.id = staff_accounts.id
+  order_items_to_orders: order_items -> orders ON orders.id = order_items.order_id
+  order_items_to_products: order_items -> products ON products.id = order_items.product_id
+  orders_to_order_items: orders -> order_items ON orders.id = order_items.order_id
+  orders_to_payments: orders -> payments ON orders.id = payments.order_id
+  orders_to_users: orders -> users ON users.id = orders.user_id
+  payments_to_orders: payments -> orders ON orders.id = payments.order_id
+  products_to_order_items: products -> order_items ON products.id = order_items.product_id
+  staff_accounts_to_accounts: staff_accounts -> accounts ON accounts.id = staff_accounts.id
+  users_to_orders: users -> orders ON users.id = orders.user_id
+
+shapes:
+  QAccounts                                accounts 
+  QAccountsStaffAccountsI                  accounts inner:staff_accounts
+  QAccountsStaffAccountsN                  accounts left:staff_accounts
+  QOrderItems                              order_items 
+  QOrderItemsOrdersI                       order_items inner:orders
+  QOrderItemsOrdersN                       order_items left:orders
+  QOrderItemsProductsI                     order_items inner:products
+  QOrderItemsProductsN                     order_items left:products
+  QOrders                                  orders 
+  QOrdersOrderItemsI                       orders inner:order_items
+  QOrdersOrderItemsN                       orders left:order_items
+  QOrdersPaymentsI                         orders inner:payments
+  QOrdersPaymentsN                         orders left:payments
+  QOrdersUsersI                            orders inner:users
+  QOrdersUsersN                            orders left:users
+  QOrdersOrderItemsNProductsN              orders left:order_items left:products  [declared]
+  QOrdersUsersIOrderItemsN                 orders inner:users left:order_items  [declared]
+  QOrdersUsersNOrderItemsN                 orders left:users left:order_items  [declared]
+  QPayments                                payments 
+  QPaymentsOrdersI                         payments inner:orders
+  QPaymentsOrdersN                         payments left:orders
+  QProducts                                products 
+  QProductsOrderItemsI                     products inner:order_items
+  QProductsOrderItemsN                     products left:order_items
+  QStaffAccounts                           staff_accounts 
+  QStaffAccountsAccountsI                  staff_accounts inner:accounts
+  QStaffAccountsAccountsN                  staff_accounts left:accounts
+  QUsers                                   users 
+  QUsersOrdersI                            users inner:orders
+  QUsersOrdersN                            users left:orders
+  QUsersOrdersIOrderItemsI                 users inner:orders inner:order_items  [declared]

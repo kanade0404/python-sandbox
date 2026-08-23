@@ -1,0 +1,22 @@
+[project]
+name = "alt-sqlalchemy-m3"
+version = "0.1.0"
+description = "Layer B Phase 1: static .sql -> typed Python codegen with sqlx-style nullability inference"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]",
+]
+
+[dependency-groups]
+dev = [
+    "pyright",
+    "pytest",
+]
+
+[tool.uv.workspace]
+members = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

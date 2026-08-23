@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": "unknown"
+    },
+    {
+      "name": "name",
+      "nullable": "unknown"
+    }
+  ],
+  "provenance": "sqlx tests/postgres/macros.rs::test_query (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "Recorded as \"unknown\" rather than true or false, deliberately. A VALUES-derived relation has no base-table attribution at all: PostgreSQL reports these columns with attrelid 0, so a catalog-driven analyser has nothing to look up and the question is out of scope for it -- which is precisely what FORMAT.md reserves \"unknown\" for, and it is scored like `true` so an engine that claims NOT NULL is still marked UNSOUND. Note the tension: for *this* particular VALUES list, both entries are non-null literals, so a sufficiently deep constant-folding analyser could legitimately prove NOT NULL, and `true` (\"there exists a database state that makes it NULL\") is strictly speaking not defensible either, since no database state is involved. \"unknown\" is the honest middle: undecidable-by-attribution, not provably nullable. Generalising is also unsafe -- a VALUES list with more than one row may contain NULL in any position. sqlx itself treats the columns of this query as nullable for the same attribution reason."
+}

@@ -1,0 +1,3 @@
+  File "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/.venv/lib/python3.12/site-packages/sqlalchemy/orm/properties.py", line 919, in _init_column_for_annotation
+    raise orm_exc.MappedAnnotationError(
+sqlalchemy.orm.exc.MappedAnnotationError: Could not locate SQLAlchemy Core type when resolving for Python type indicated by 'typing.Any' inside the Mapped[] annotation for the 'location' attribute; the type object is not resolvable by the registry

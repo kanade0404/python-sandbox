@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "total",
+      "nullable": true
+    },
+    {
+      "name": "n",
+      "nullable": false
+    },
+    {
+      "name": "hi",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "An ungrouped aggregate emits exactly one row even over an empty table. SUM and MAX of zero rows are NULL; COUNT of zero rows is 0. The whole row is decided by the function, not by any column's catalog entry, which is precisely what an EXPLAIN-driven engine cannot see."
+}

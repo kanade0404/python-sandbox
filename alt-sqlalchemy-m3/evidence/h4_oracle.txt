@@ -1,0 +1,92 @@
+CORPUS ORACLE -- engine: altsa_sqlgen-phase1
+========================================================================
+
+[OK      ] own/aggregate_groupby  (1 row(s))
+           claimed NOT NULL: a_id
+
+[OK      ] own/coalesce_not_null  (2 row(s))
+           claimed NOT NULL: id
+
+[OK      ] own/full_join  (4 row(s))
+           claimed NOT NULL: (none)
+           NULLs actually observed (all in nullable-claimed columns): x_id, x_label, y_id
+
+[OK      ] own/inner_join  (1 row(s))
+           claimed NOT NULL: id, label, b_id, amount
+
+[OK      ] own/left_join_basic  (2 row(s))
+           claimed NOT NULL: id, label
+           NULLs actually observed (all in nullable-claimed columns): amount, b_id
+
+[OK      ] own/left_join_derived_table  (2 row(s))
+           claimed NOT NULL: id
+           NULLs actually observed (all in nullable-claimed columns): n, total
+
+[OK      ] own/left_join_lateral  (2 row(s))
+           claimed NOT NULL: id
+           NULLs actually observed (all in nullable-claimed columns): amount, b_id
+
+[OK      ] own/left_join_nested_right  (2 row(s))
+           claimed NOT NULL: id
+           NULLs actually observed (all in nullable-claimed columns): b_id, c_id
+
+[OK      ] own/passthrough_notnull  (2 row(s))
+           claimed NOT NULL: id, label
+           NULLs actually observed (all in nullable-claimed columns): note
+
+[OK      ] sqlx/cte_materialized_preserves_nullability  (2 row(s))
+           claimed NOT NULL: id, text
+           NULLs actually observed (all in nullable-claimed columns): owner_id
+
+[OK      ] sqlx/cte_preserves_nullability  (2 row(s))
+           claimed NOT NULL: id, text
+           NULLs actually observed (all in nullable-claimed columns): owner_id
+
+[OK      ] sqlx/full_join_both_nullable  (4 row(s))
+           claimed NOT NULL: (none)
+           NULLs actually observed (all in nullable-claimed columns): id1, id2
+
+[OK      ] sqlx/inner_join_preserves_notnull  (1 row(s))
+           claimed NOT NULL: id
+
+[OK      ] sqlx/left_join_makes_nullable  (1 row(s))
+           claimed NOT NULL: (none)
+           NULLs actually observed (all in nullable-claimed columns): id
+
+[OK      ] sqlx/left_join_outer_half_preserved  (2 row(s))
+           claimed NOT NULL: id1
+           NULLs actually observed (all in nullable-claimed columns): id2
+
+[OK      ] sqlx/nullable_base_column  (1 row(s))
+           claimed NOT NULL: id, text
+
+[OK      ] sqlx/order_by_limit_preserves  (2 row(s))
+           claimed NOT NULL: text
+           NULLs actually observed (all in nullable-claimed columns): owner_id
+
+[OK      ] sqlx/right_join_inverts  (2 row(s))
+           claimed NOT NULL: id2
+           NULLs actually observed (all in nullable-claimed columns): id1
+
+[OK      ] sqlx/simple_select_star  (2 row(s))
+           claimed NOT NULL: id, created_at, text
+           NULLs actually observed (all in nullable-claimed columns): owner_id
+
+[OK      ] sqlx/subquery_preserves_nullability  (2 row(s))
+           claimed NOT NULL: id, text
+           NULLs actually observed (all in nullable-claimed columns): owner_id
+
+[OK      ] sqlx/union_all_merges_nullability  (4 row(s))
+           claimed NOT NULL: (none)
+           NULLs actually observed (all in nullable-claimed columns): b
+
+------------------------------------------------------------------------
+SUMMARY
+
+  seeded cases        : 21
+  result rows         : 43
+  NOT NULL assertions : 48 (column x row)
+  violations          : 0
+  errors              : 0
+
+PASS: 0 unsound observation(s), 0 error(s)

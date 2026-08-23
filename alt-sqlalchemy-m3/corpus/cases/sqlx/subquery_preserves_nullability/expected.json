@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "text",
+      "nullable": false
+    },
+    {
+      "name": "owner_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_table_subquery, ported to PostgreSQL (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "A derived table in the FROM clause is transparent to nullability: an inner SELECT with no outer join, no aggregate and no set operation republishes each column with exactly the nullability it had in the base table. The expectation is therefore identical to `simple_select_star`, and the case exists to check that attribution survives one level of subquery nesting -- PostgreSQL usually flattens this subquery away entirely, so an engine reading a plan sees the base scan, while an engine walking the parse tree must propagate the mapping itself."
+}

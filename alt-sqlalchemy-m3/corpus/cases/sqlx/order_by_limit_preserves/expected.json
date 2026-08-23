@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "text",
+      "nullable": false
+    },
+    {
+      "name": "owner_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/sqlite/describe.rs::it_describes_order_by_with_limit (regression for sqlx issue #4147) (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "ORDER BY and LIMIT only reorder and truncate rows; neither can introduce a NULL, so the answer is the plain base-table answer -- `text` NOT NULL, `owner_id` nullable. It is a regression case (sqlx #4147) because adding a sort/limit changes the plan shape: the scan is wrapped in a Limit over a Sort node, and an engine that reads attribution off the top plan node instead of chasing it down to the scan loses the NOT NULL on `text`. The `ORDER BY id` also references a column that is not in the select list, which is a second way to confuse output-column mapping."
+}

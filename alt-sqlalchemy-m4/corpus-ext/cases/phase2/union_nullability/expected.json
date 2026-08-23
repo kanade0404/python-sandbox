@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": true
+    },
+    {
+      "name": "b",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "A set operation merges positionally and a column is nullable exactly when ANY branch's is. `a` pairs a NOT NULL column with a nullable one and must come out nullable; `b` pairs two non-null expressions and must NOT. An engine that inspects only the leading branch -- sqlc returns `c.outputColumns(qc, n.Larg)` and never looks at Rarg -- calls `a` NOT NULL, which is unsound, and is right about `b` by accident."
+}

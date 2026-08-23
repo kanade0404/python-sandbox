@@ -1,0 +1,3 @@
+[leakage] 10 generated public function(s) across 3 module(s): 0 finding(s) (want 0)
+[any-check] 0 occurrence(s) of `Any` in generated source (want 0)
+H2 leakage clause: PASS

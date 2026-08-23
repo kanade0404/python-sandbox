@@ -1,0 +1,23 @@
+{
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "include": [
+    "app",
+    "generated_a",
+    "generated_b",
+    "bench",
+    "m5link.py",
+    "regen.py"
+  ],
+  "extraPaths": [
+    ".",
+    "../alt-sqlalchemy-m2",
+    "../alt-sqlalchemy-m3"
+  ],
+  "reportMissingTypeStubs": "error",
+  "reportUnnecessaryIsInstance": "error",
+  "reportUnknownMemberType": "error",
+  "reportUnknownArgumentType": "error",
+  "reportUnknownVariableType": "error",
+  "reportUnknownParameterType": "error"
+}

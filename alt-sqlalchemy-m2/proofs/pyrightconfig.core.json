@@ -1,0 +1,8 @@
+{
+  "include": ["../altsa_runtime", "../altsa_gen", "../generated"],
+  "extraPaths": [".."],
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "reportMissingTypeStubs": "error",
+  "reportUnnecessaryTypeIgnoreComment": "error"
+}

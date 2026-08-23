@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "amount",
+      "nullable": false
+    },
+    {
+      "name": "note",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "COALESCE with a non-null final argument is never NULL, even over a null-extended join and even over a nullable base column. A perfect analyser proves both. Phase 1 sees only that the columns are expressions with no base-table attribution, so both are expected safe false positives -- the single most annoying gap in practice, and squarely M4's job."
+}

@@ -1,0 +1,824 @@
+{
+  "cases": [
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "a_id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 1,
+          "name": "total",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 2,
+          "name": "n",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        }
+      ],
+      "error": null,
+      "id": "own/aggregate_groupby",
+      "notes": "With GROUP BY, every emitted group has at least one row, and b.amount is NOT NULL -- so SUM cannot be NULL here. All three columns are non-null in the correct answer. Phase 1 gets `a_id` right from the catalog and is expected to be a safe false positive on the two aggregates.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "SAFE-FALSE-POSITIVE"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 0,
+          "name": "total",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 1,
+          "name": "n",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 2,
+          "name": "hi",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/aggregate_no_groupby",
+      "notes": "An ungrouped aggregate always produces exactly one row, even over an empty table. SUM and MAX of no rows are NULL; COUNT of no rows is 0, never NULL. Phase 1 has no expression-level reasoning, so `n` is expected to come back as a SAFE FALSE POSITIVE -- this is the clearest single instance of the Phase1 -> Phase2 delta.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "SAFE-FALSE-POSITIVE"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 1,
+          "name": "amount",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 2,
+          "name": "note",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        }
+      ],
+      "error": null,
+      "id": "own/coalesce_not_null",
+      "notes": "COALESCE with a non-null final argument is never NULL, even over a null-extended join and even over a nullable base column. A perfect analyser proves both. Phase 1 sees only that the columns are expressions with no base-table attribution, so both are expected safe false positives -- the single most annoying gap in practice, and squarely M4's job.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "SAFE-FALSE-POSITIVE"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 0,
+          "name": "x_id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 1,
+          "name": "x_label",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 2,
+          "name": "y_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/full_join",
+      "notes": "A FULL join null-extends BOTH inputs, so every column is nullable regardless of catalog constraints. The join condition is deliberately unsatisfiable for the seeded data so real NULLs appear on both sides.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "label",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "b_id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 3,
+          "name": "amount",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/inner_join",
+      "notes": "An inner join never null-extends, so the EXPLAIN pass must leave the catalog answers alone. This is the case that catches an over-eager plan walker.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "label",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 2,
+          "name": "b_id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 3,
+          "name": "amount",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/left_join_basic",
+      "notes": "The canonical case. b.* is NOT NULL in the catalog and must be upgraded to nullable by the EXPLAIN pass; a.* must NOT be, so this measures precision in both directions at once.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 1,
+          "name": "total",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 2,
+          "name": "n",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/left_join_derived_table",
+      "notes": "A non-flattenable derived table (it aggregates) on the null-extended side. Both of its columns are nullable in the correct answer -- `total` and `n` are non-null WITHIN a group, but the LEFT JOIN can null-extend the whole subquery row away.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 1,
+          "name": "b_id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 2,
+          "name": "amount",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/left_join_lateral",
+      "notes": "LATERAL on the null-extended side. The correlated subquery cannot be flattened, so the plan carries a Subquery/Limit node between the join and the base relation -- a shape where a walker that only looks at the direct child's Output would lose the marking.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 1,
+          "name": "b_id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 2,
+          "name": "c_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/left_join_nested_right",
+      "notes": "THE soundness case, and the reason this port deviates from sqlx. PostgreSQL 16 replans this as `Hash Join / Join Type: Right` with the (b JOIN c) subtree as the OUTER child and `a` as the INNER child. sqlx's rule marks the child whose Parent Relationship is \"Inner\" -- which under a Right join is the PRESERVED side -- so it would call a.id nullable (harmless) and b.id/c.id NOT NULL (unsound). Verified against live data: a=2 has no b, and the row really does come back (2, NULL, NULL).",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "label",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "note",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "own/passthrough_notnull",
+      "notes": "The baseline. No joins, no expressions -- every answer comes straight from pg_attribute.attnotnull. If this case ever regresses, pass 1 is broken. The WHERE clause is the common optional-filter idiom, which also exercises a parameter used twice: both occurrences must collapse to one $1 for DESCRIBE and one %(min_id)s for psycopg. The oracle binds it to NULL, so the filter is a no-op and every seeded row is returned as evidence.",
+      "provenance": "hand-written for alt-SQLAlchemy M3",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 0,
+          "name": "v",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/bare_expression",
+      "notes": "`1::int8 + 10` is a constant folded from two non-null literals by a strict operator, so no database state can make it NULL: the correct answer is NOT NULL. sqlx itself asserts nullable here, and its own comment explains why -- \"postgres cannot infer nullability from an expression\", i.e. the wire protocol's RowDescription carries no attribute attribution for a computed column, so sqlx falls back to the safe answer. Any engine that reasons only from catalog attribution will do the same, which makes this an expected SAFE-FALSE-POSITIVE for Phase 1 rather than a bug. Explicitly aliased `AS v` because a bare expression is reported by PostgreSQL as `?column?`, which is not a usable identifier.",
+      "provenance": "sqlx tests/postgres/describe.rs::it_describes_expression (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "SAFE-FALSE-POSITIVE"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 0,
+          "name": "total",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/coalesce_aggregate_notnull",
+      "notes": "The repair of `ungrouped_aggregate_nullable`: COALESCE returns its first non-null argument, and the final argument here is the literal `0`, which is never NULL. So the whole expression is NOT NULL for every database state, including the empty table where the inner `sum()` is NULL. Requires reasoning about COALESCE's last argument specifically -- knowing only that \"COALESCE has a nullable argument\" gives the wrong answer, and falling back to \"it is an expression, therefore nullable\" gives a SAFE-FALSE-POSITIVE.",
+      "provenance": "sqlx tests/sqlite/describe.rs::it_describes_ungrouped_aggregate (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "SAFE-FALSE-POSITIVE"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "text",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "owner_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/cte_materialized_preserves_nullability",
+      "notes": "`AS MATERIALIZED` is an optimisation barrier, not a semantic one: the rows handed to the outer query are byte-for-byte the rows of the base table, so the correct nullability is unchanged from the inlined CTE. What does change is the plan -- the CTE becomes a separate CTE Scan node whose output columns carry no base-table attribution -- so an engine that infers purely from the plan may lose the NOT NULL on `id` and `text` and degrade to safe-nullable. Such a degradation would be a SAFE-FALSE-POSITIVE, i.e. a legitimate precision finding rather than a bug, and the expectation stays at the correct answer regardless of which strategy the engine happens to use.",
+      "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_table_subquery, ported to PostgreSQL as a MATERIALIZED CTE (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "text",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "owner_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/cte_preserves_nullability",
+      "notes": "Same shape as `subquery_preserves_nullability` but written as a CTE. Since PostgreSQL 12 a non-recursive, side-effect-free, singly-referenced CTE is inlined by default, so the plan looks the same as the flattened subquery and the nullability answer is identical to the plain table scan. The pair of cases separates \"understands derived tables\" from \"understands the WITH syntax\".",
+      "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_table_subquery, ported to PostgreSQL as a CTE (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 0,
+          "name": "id1",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 1,
+          "name": "id2",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/full_join_both_nullable",
+      "notes": "A FULL OUTER JOIN preserves neither input: unmatched rows from either side are emitted with the other side null-extended, so both NOT NULL catalog columns become nullable. With `ON false` no row matches at all, so the result is exactly the union of the two null-extended halves and each column is genuinely NULL in some row. Claiming NOT NULL for either column here is UNSOUND.",
+      "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/inner_join_preserves_notnull",
+      "notes": "An INNER JOIN never null-extends either side: a result row exists only where a matching pair exists, so `tweet.id` keeps its catalog NOT NULL. The join partner `products` is entirely nullable, which is the point -- a nullable column on the *other* side of an inner join must not contaminate this one. Paired with the LEFT/RIGHT/FULL variants harvested from the same sqlx test, this pins down that the nullability upgrade is driven by the join type and the side, not by the presence of a join at all.",
+      "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/left_join_makes_nullable",
+      "notes": "`tweet.id` is a NOT NULL primary key in the catalog, but it sits on the inner (right) side of a LEFT JOIN, so every unmatched left row is null-extended and the column becomes nullable. The join condition is literally `false`, so *no* row ever matches and the NULL is unavoidable. This is the canonical demonstration that catalog nullability is a lower bound only: an engine that reports NOT NULL here is UNSOUND, not merely imprecise.",
+      "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id1",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 1,
+          "name": "id2",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/left_join_outer_half_preserved",
+      "notes": "Both columns are the same catalog attribute (`tweet.id`, NOT NULL), reached through two aliases of the same table, so the only thing that can distinguish them is which side of the outer join they sit on. `tweet1` is the preserved (left) side and stays NOT NULL; `tweet2` is the inner side and is null-extended. This forces per-relation-instance tracking: an engine that keys nullability on the table or on the column OID rather than on the alias will collapse the two answers into one and get at least one of them wrong.",
+      "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "text",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "owner_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/nullable_base_column",
+      "notes": "The positive-and-negative control in one query: `id` and `text` are declared NOT NULL and must stay NOT NULL, while `owner_id` has no constraint and must stay nullable. `LIMIT 1` is semantically inert for nullability -- it can only remove rows, never introduce NULLs -- so it is here to check that a row-count-modifying clause does not perturb the answer. An engine that blanket-degrades to nullable would fail the first two columns; one that trusts a sampled row would wrongly call `owner_id` NOT NULL.",
+      "provenance": "sqlx tests/postgres/macros.rs::test_non_null (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "text",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "owner_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/order_by_limit_preserves",
+      "notes": "ORDER BY and LIMIT only reorder and truncate rows; neither can introduce a NULL, so the answer is the plain base-table answer -- `text` NOT NULL, `owner_id` nullable. It is a regression case (sqlx #4147) because adding a sort/limit changes the plan shape: the scan is wrapped in a Limit over a Sort node, and an engine that reads attribution off the top plan node instead of chasing it down to the scan loses the NOT NULL on `text`. The `ORDER BY id` also references a column that is not in the select list, which is a second way to confuse output-column mapping.",
+      "provenance": "sqlx tests/sqlite/describe.rs::it_describes_order_by_with_limit (regression for sqlx issue #4147) (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "explain",
+          "index": 0,
+          "name": "id1",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "id2",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/right_join_inverts",
+      "notes": "The mirror image of the LEFT JOIN case, and the reason it is worth having both: a RIGHT JOIN preserves the *right* relation and null-extends the left, so the answers swap. PostgreSQL's planner also rewrites RIGHT JOIN into a LEFT JOIN with the inputs commuted, which means an engine reading nullability out of a plan must follow the swap rather than trusting the textual order of the FROM clause.",
+      "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "created_at",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "text",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 3,
+          "name": "owner_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/simple_select_star",
+      "notes": "Straight scan of a base table with no join and no outer nesting, so every output column inherits its catalog nullability verbatim. `id` is the BIGSERIAL primary key, `created_at` and `text` are declared NOT NULL, and `owner_id` is the one column with no NOT NULL constraint. This is the baseline: an engine that gets this wrong has a catalog-lookup bug, not an inference bug.",
+      "provenance": "sqlx tests/postgres/describe.rs::it_describes_simple (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "catalog",
+          "index": 1,
+          "name": "text",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "catalog",
+          "index": 2,
+          "name": "owner_id",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/subquery_preserves_nullability",
+      "notes": "A derived table in the FROM clause is transparent to nullability: an inner SELECT with no outer join, no aggregate and no set operation republishes each column with exactly the nullability it had in the base table. The expectation is therefore identical to `simple_select_star`, and the case exists to check that attribution survives one level of subquery nesting -- PostgreSQL usually flattens this subquery away entirely, so an engine reading a plan sees the base scan, while an engine walking the parse tree must propagate the mapping itself.",
+      "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_table_subquery, ported to PostgreSQL (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 0,
+          "name": "total",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/ungrouped_aggregate_nullable",
+      "notes": "An aggregate with no GROUP BY always produces exactly one row, even over an empty table -- and `sum()` over zero input rows returns NULL, not 0. So `total` is nullable no matter what constraints the input column carries; it would still be nullable if `owner_id` were declared NOT NULL. This is the case that catches an engine which reasons \"the argument is an aggregate of a column, so copy that column's nullability\". Deliberately unseeded: the empty table *is* the witness.",
+      "provenance": "sqlx tests/sqlite/describe.rs::it_describes_ungrouped_aggregate (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 0,
+          "name": "a",
+          "verdict": "SAFE-FALSE-POSITIVE"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 1,
+          "name": "b",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/union_all_merges_nullability",
+      "notes": "A set operation merges positionally, and a UNION column is nullable exactly when *any* branch's column is: the disjunction, not the first branch's answer. Column `a` draws on `tweet.text` and `accounts.name`, both NOT NULL, so it stays NOT NULL. Column `b` draws on the nullable `tweet.owner_id` and, from the second branch, a bare NULL literal -- either one alone is enough to make it nullable. PostgreSQL takes the output names from the first branch, hence `a` and `b`; the second branch's `NULL` is typed by unification with `bigint`. An engine that inspects only the leading branch would still get `b` right here but for the wrong reason, so the seed makes both witnesses real.",
+      "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_union, ported to PostgreSQL (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "SAFE-FALSE-POSITIVE"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "unknown",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "unknown",
+          "got": "NULL",
+          "how": "unknown",
+          "index": 1,
+          "name": "name",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "sqlx/values_derived_all_nullable",
+      "notes": "Recorded as \"unknown\" rather than true or false, deliberately. A VALUES-derived relation has no base-table attribution at all: PostgreSQL reports these columns with attrelid 0, so a catalog-driven analyser has nothing to look up and the question is out of scope for it -- which is precisely what FORMAT.md reserves \"unknown\" for, and it is scored like `true` so an engine that claims NOT NULL is still marked UNSOUND. Note the tension: for *this* particular VALUES list, both entries are non-null literals, so a sufficiently deep constant-folding analyser could legitimately prove NOT NULL, and `true` (\"there exists a database state that makes it NULL\") is strictly speaking not defensible either, since no database state is involved. \"unknown\" is the honest middle: undecidable-by-attribution, not provably nullable. Generalising is also unsafe -- a VALUES list with more than one row may contain NULL in any position. sqlx itself treats the columns of this query as nullable for the same attribution reason.",
+      "provenance": "sqlx tests/postgres/macros.rs::test_query (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+      "verdict": "PASS"
+    }
+  ],
+  "engine": "altsa_sqlgen-phase1"
+}

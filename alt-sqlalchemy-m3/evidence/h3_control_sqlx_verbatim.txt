@@ -1,0 +1,152 @@
+CORPUS RUNNER -- engine: sqlx-verbatim-control
+========================================================================
+
+[SAFE-FALSE-POSITIVE] own/aggregate_groupby
+       0. a_id                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+     * 1. total                  expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+     * 2. n                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] own/aggregate_no_groupby
+       0. total                  expected=NULL      got=NULL      via=unknown   PASS
+     * 1. n                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       2. hi                     expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] own/coalesce_not_null
+     * 0. id                     expected=NOT NULL  got=NULL      via=explain   SAFE-FALSE-POSITIVE
+     * 1. amount                 expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+     * 2. note                   expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[PASS               ] own/full_join
+       0. x_id                   expected=NULL      got=NULL      via=explain   PASS
+       1. x_label                expected=NULL      got=NULL      via=explain   PASS
+       2. y_id                   expected=NULL      got=NULL      via=explain   PASS
+
+[PASS               ] own/inner_join
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. label                  expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. b_id                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       3. amount                 expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+
+[UNSOUND            ] own/left_join_basic
+     * 0. id                     expected=NOT NULL  got=NULL      via=explain   SAFE-FALSE-POSITIVE
+     * 1. label                  expected=NOT NULL  got=NULL      via=explain   SAFE-FALSE-POSITIVE
+     * 2. b_id                   expected=NULL      got=NOT NULL  via=catalog   UNSOUND
+     * 3. amount                 expected=NULL      got=NOT NULL  via=catalog   UNSOUND
+
+[PASS               ] own/left_join_derived_table
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. total                  expected=NULL      got=NULL      via=explain   PASS
+       2. n                      expected=NULL      got=NULL      via=explain   PASS
+
+[PASS               ] own/left_join_lateral
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. b_id                   expected=NULL      got=NULL      via=explain   PASS
+       2. amount                 expected=NULL      got=NULL      via=explain   PASS
+
+[UNSOUND            ] own/left_join_nested_right
+     * 0. id                     expected=NOT NULL  got=NULL      via=explain   SAFE-FALSE-POSITIVE
+     * 1. b_id                   expected=NULL      got=NOT NULL  via=catalog   UNSOUND
+     * 2. c_id                   expected=NULL      got=NOT NULL  via=catalog   UNSOUND
+
+[PASS               ] own/passthrough_notnull
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. label                  expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. note                   expected=NULL      got=NULL      via=catalog   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/bare_expression
+     * 0. v                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] sqlx/coalesce_aggregate_notnull
+     * 0. total                  expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+
+[PASS               ] sqlx/cte_materialized_preserves_nullability
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. text                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. owner_id               expected=NULL      got=NULL      via=catalog   PASS
+
+[PASS               ] sqlx/cte_preserves_nullability
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. text                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. owner_id               expected=NULL      got=NULL      via=catalog   PASS
+
+[PASS               ] sqlx/full_join_both_nullable
+       0. id1                    expected=NULL      got=NULL      via=explain   PASS
+       1. id2                    expected=NULL      got=NULL      via=explain   PASS
+
+[PASS               ] sqlx/inner_join_preserves_notnull
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+
+[PASS               ] sqlx/left_join_makes_nullable
+       0. id                     expected=NULL      got=NULL      via=explain   PASS
+
+[PASS               ] sqlx/left_join_outer_half_preserved
+       0. id1                    expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. id2                    expected=NULL      got=NULL      via=explain   PASS
+
+[PASS               ] sqlx/nullable_base_column
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. text                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. owner_id               expected=NULL      got=NULL      via=catalog   PASS
+
+[PASS               ] sqlx/order_by_limit_preserves
+       0. text                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. owner_id               expected=NULL      got=NULL      via=catalog   PASS
+
+[PASS               ] sqlx/right_join_inverts
+       0. id1                    expected=NULL      got=NULL      via=explain   PASS
+       1. id2                    expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+
+[PASS               ] sqlx/simple_select_star
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. created_at             expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. text                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       3. owner_id               expected=NULL      got=NULL      via=catalog   PASS
+
+[PASS               ] sqlx/subquery_preserves_nullability
+       0. id                     expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       1. text                   expected=NOT NULL  got=NOT NULL  via=catalog   PASS
+       2. owner_id               expected=NULL      got=NULL      via=catalog   PASS
+
+[PASS               ] sqlx/ungrouped_aggregate_nullable
+       0. total                  expected=NULL      got=NULL      via=unknown   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/union_all_merges_nullability
+     * 0. a                      expected=NOT NULL  got=NULL      via=unknown   SAFE-FALSE-POSITIVE
+       1. b                      expected=NULL      got=NULL      via=unknown   PASS
+
+[PASS               ] sqlx/values_derived_all_nullable
+       0. id                     expected=unknown   got=NULL      via=unknown   PASS
+       1. name                   expected=unknown   got=NULL      via=unknown   PASS
+
+------------------------------------------------------------------------
+SUMMARY
+
+  cases        : 26 (own=10, sqlx=16)
+  columns      : 65
+  PASS                : 49
+  SAFE-FALSE-POSITIVE : 12
+  UNSOUND             : 4
+  MISMATCH            : 0
+  ERROR               : 0
+
+SAFE FALSE POSITIVES (12) -- the Phase1 -> Phase2 precision delta:
+  own/aggregate_groupby                  total                (via unknown)
+  own/aggregate_groupby                  n                    (via unknown)
+  own/aggregate_no_groupby               n                    (via unknown)
+  own/coalesce_not_null                  id                   (via explain)
+  own/coalesce_not_null                  amount               (via unknown)
+  own/coalesce_not_null                  note                 (via unknown)
+  own/left_join_basic                    id                   (via explain)
+  own/left_join_basic                    label                (via explain)
+  own/left_join_nested_right             id                   (via explain)
+  sqlx/bare_expression                   v                    (via unknown)
+  sqlx/coalesce_aggregate_notnull        total                (via unknown)
+  sqlx/union_all_merges_nullability      a                    (via unknown)
+
+UNSOUND (4) -- MUST BE ZERO:
+  own/left_join_basic                    b_id                 (via catalog)
+  own/left_join_basic                    amount               (via catalog)
+  own/left_join_nested_right             b_id                 (via catalog)
+  own/left_join_nested_right             c_id                 (via catalog)
+
+FAIL: 4 unsound, 0 mismatch, 0 error, 12 safe-false-positive

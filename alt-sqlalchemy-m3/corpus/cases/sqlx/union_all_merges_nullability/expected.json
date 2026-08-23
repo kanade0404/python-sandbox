@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": false
+    },
+    {
+      "name": "b",
+      "nullable": true
+    }
+  ],
+  "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_union, ported to PostgreSQL (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "A set operation merges positionally, and a UNION column is nullable exactly when *any* branch's column is: the disjunction, not the first branch's answer. Column `a` draws on `tweet.text` and `accounts.name`, both NOT NULL, so it stays NOT NULL. Column `b` draws on the nullable `tweet.owner_id` and, from the second branch, a bare NULL literal -- either one alone is enough to make it nullable. PostgreSQL takes the output names from the first branch, hence `a` and `b`; the second branch's `NULL` is typed by unification with `bigint`. An engine that inspects only the leading branch would still get `b` right here but for the wrong reason, so the seed makes both witnesses real."
+}

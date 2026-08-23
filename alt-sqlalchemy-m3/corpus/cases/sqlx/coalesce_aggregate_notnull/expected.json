@@ -1,0 +1,10 @@
+{
+  "columns": [
+    {
+      "name": "total",
+      "nullable": false
+    }
+  ],
+  "provenance": "sqlx tests/sqlite/describe.rs::it_describes_ungrouped_aggregate (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "The repair of `ungrouped_aggregate_nullable`: COALESCE returns its first non-null argument, and the final argument here is the literal `0`, which is never NULL. So the whole expression is NOT NULL for every database state, including the empty table where the inner `sum()` is NULL. Requires reasoning about COALESCE's last argument specifically -- knowing only that \"COALESCE has a nullable argument\" gives the wrong answer, and falling back to \"it is an expression, therefore nullable\" gives a SAFE-FALSE-POSITIVE."
+}

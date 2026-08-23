@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "id1",
+      "nullable": true
+    },
+    {
+      "name": "id2",
+      "nullable": false
+    }
+  ],
+  "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "The mirror image of the LEFT JOIN case, and the reason it is worth having both: a RIGHT JOIN preserves the *right* relation and null-extends the left, so the answers swap. PostgreSQL's planner also rewrites RIGHT JOIN into a LEFT JOIN with the inputs commuted, which means an engine reading nullability out of a plan must follow the swap rather than trusting the textual order of the FROM clause."
+}

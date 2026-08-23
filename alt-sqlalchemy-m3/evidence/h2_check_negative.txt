@@ -1,0 +1,44 @@
+EXPECT-ERROR markers : 16
+lines with errors    : 16
+total diagnostics    : 22
+
+OK   L34   n1_wrong_param_type
+        [reportArgumentType] Argument of type "Literal['00000000-0000-0000-0000-000000000000']" cannot be assigned to parameter "order_id" of type "UUID" in function "get_order_with_user"
+OK   L41   n2_float_is_not_decimal
+        [reportArgumentType] Argument of type "float" cannot be assigned to parameter "min_total" of type "Decimal" in function "list_orders_left_join_users"
+OK   L50   n3_left_join_none_bites
+        [reportOptionalMemberAccess] "hex" is not a known attribute of "None"
+OK   L60   n4_one_result_without_none_check
+        [reportOptionalMemberAccess] "total" is not a known attribute of "None"
+OK   L68   n5_misspelled_field
+        [reportUnknownVariableType] Type of "_" is unknown
+        [reportUnknownMemberType] Type of "emial" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "emial" for class "ListOrdersLeftJoinUsersRow"
+OK   L76   n6_positional_argument
+        [reportCallIssue] Expected 1 positional argument
+OK   L83   n7_missing_parameter
+        [reportCallIssue] Argument missing for parameter "order_id"
+OK   L90   n8_unknown_parameter
+        [reportCallIssue] No parameter named "tenant_id"
+OK   L98   n9_question_override_bites
+        [reportAssignmentType] Type "str | None" is not assignable to declared type "str"
+OK   L107  n10_safe_default_bites
+        [reportAssignmentType] Type "int | None" is not assignable to declared type "int"
+OK   L118  n11_exec_returns_int_not_row
+        [reportUnknownVariableType] Type of "_" is unknown
+        [reportUnknownMemberType] Type of "id" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "id" for class "int"
+OK   L125  n12_many_is_a_list
+        [reportUnknownVariableType] Type of "_" is unknown
+        [reportUnknownMemberType] Type of "email" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "email" for class "list[ListOrdersLeftJoinUsersRow]"
+OK   L133  n13_row_is_frozen
+        [reportAttributeAccessIssue] Cannot assign to attribute "email" for class "ListOrdersLeftJoinUsersRow"
+OK   L141  n14_array_param_type
+        [reportArgumentType] Argument of type "Literal['a']" cannot be assigned to parameter "tags" of type "list[str | None]" in function "upsert_product"
+OK   L152  n15_unmarked_aggregate_stays_optional
+        [reportAssignmentType] Type "Decimal | None" is not assignable to declared type "Decimal"
+OK   L160  n16_connection_type
+        [reportArgumentType] Argument of type "Literal['postgresql://']" cannot be assigned to parameter "conn" of type "_Conn" in function "get_order_with_user"
+
+PASS: all 16 negative cases produced errors (22 diagnostics total; pyright may emit more than one per line)

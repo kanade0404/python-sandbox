@@ -1,0 +1,7 @@
+/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/negative_checks.py
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/negative_checks.py:29:5 - error: Type of "_c" is unknown (reportUnknownVariableType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/negative_checks.py:29:10 - error: Type of "nonexistent" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/negative_checks.py:29:14 - error: Cannot access attribute "nonexistent" for class "Users"
+    Attribute "nonexistent" is unknown (reportAttributeAccessIssue)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/negative_checks.py:42:17 - error: "id" is not a known attribute of "None" (reportOptionalMemberAccess)
+4 errors, 0 warnings, 0 informations

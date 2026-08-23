@@ -1,0 +1,10 @@
+{
+  "columns": [
+    {
+      "name": "total",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/sqlite/describe.rs::it_describes_ungrouped_aggregate (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "An aggregate with no GROUP BY always produces exactly one row, even over an empty table -- and `sum()` over zero input rows returns NULL, not 0. So `total` is nullable no matter what constraints the input column carries; it would still be nullable if `owner_id` were declared NOT NULL. This is the case that catches an engine which reasons \"the argument is an aggregate of a column, so copy that column's nullability\". Deliberately unseeded: the empty table *is* the witness."
+}

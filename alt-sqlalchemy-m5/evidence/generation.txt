@@ -1,0 +1,15 @@
+Layer A (altsa_gen, M2)
+  tables 7  enums 2  edges 10  shapes 31  projections 4
+  generated_a/facade.py: 1223 lines
+  median of 3 full runs: 24 ms  (all: 44, 24, 23 ms)
+
+Layer B (altsa_sqlgen, M3)
+  12 queries in 3 modules, 52 result columns
+  generated_b/__init__.py: 13 lines
+  generated_b/orders.py: 277 lines
+  generated_b/products.py: 217 lines
+  generated_b/users.py: 99 lines
+  total: 606 lines
+  median of 3 full runs: 15 ms  (all: 16, 14, 15 ms)
+
+input LOC: joins.toml 85, queries/*.sql 123

@@ -1,0 +1,66 @@
+CORPUS RUNNER -- engine: altsa-analyze-m4-static
+========================================================================
+
+[PASS               ] phase2/aggregate_sum_groupby_notnull_arg
+       0. grp                    expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. total                  expected=NOT NULL  got=NOT NULL  via=static    PASS
+       2. n                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+
+[PASS               ] phase2/aggregate_sum_groupby_nullable_arg
+       0. grp                    expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. total                  expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/aggregate_sum_no_groupby
+       0. total                  expected=NULL      got=NULL      via=static    PASS
+       1. n                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       2. hi                     expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/binary_op_mixed
+       0. a                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. b                      expected=NULL      got=NULL      via=static    PASS
+       2. c                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       3. d                      expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/case_no_else
+       0. id                     expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. v                      expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/case_with_else
+       0. v                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. w                      expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/cast_preserves
+       0. a                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. b                      expected=NULL      got=NULL      via=static    PASS
+       2. c                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+
+[PASS               ] phase2/coalesce_chain
+       0. a                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. b                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+       2. c                      expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/nullif_case
+       0. raw                    expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. v                      expected=NULL      got=NULL      via=static    PASS
+
+[PASS               ] phase2/scalar_subquery
+       0. id                     expected=NOT NULL  got=NOT NULL  via=static    PASS
+       1. note                   expected=NULL      got=NULL      via=static    PASS
+       2. has_n                  expected=NOT NULL  got=NOT NULL  via=static    PASS
+
+[PASS               ] phase2/union_nullability
+       0. a                      expected=NULL      got=NULL      via=static    PASS
+       1. b                      expected=NOT NULL  got=NOT NULL  via=static    PASS
+
+------------------------------------------------------------------------
+SUMMARY
+
+  cases        : 11 (phase2=11)
+  columns      : 29
+  PASS                : 29
+  SAFE-FALSE-POSITIVE : 0
+  UNSOUND             : 0
+  MISMATCH            : 0
+  ERROR               : 0
+
+PASS: 0 unsound, 0 mismatch, 0 error, 0 safe-false-positive

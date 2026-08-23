@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "id1",
+      "nullable": true
+    },
+    {
+      "name": "id2",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "A FULL OUTER JOIN preserves neither input: unmatched rows from either side are emitted with the other side null-extended, so both NOT NULL catalog columns become nullable. With `ON false` no row matches at all, so the result is exactly the union of the two null-extended halves and each column is genuinely NULL in some row. Claiming NOT NULL for either column here is UNSOUND."
+}

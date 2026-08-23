@@ -1,0 +1,45 @@
+{
+  "iterations": 2000,
+  "warmup": 200,
+  "sqlalchemy": "2.0.52",
+  "psycopg": "3.3.4",
+  "memo_hits": 2200,
+  "memo_misses": 0,
+  "cache_lines": [
+    "  Layer A   1st execution: CACHE_MISS, 2nd: CACHE_HIT, 3rd: CACHE_HIT",
+    "  Layer A   compile-cache HIT on the hot path: YES",
+    "  Core      2nd execution of the prebuilt statement: CACHE_HIT"
+  ],
+  "timings": {
+    "a) Layer A facade": {
+      "note": "generated facade -> altsa_runtime -> SQLAlchemy Core (shape memo + compile cache)",
+      "p10_us": 160.58300000000003,
+      "median_us": 172.83350000000002,
+      "p90_us": 197.625
+    },
+    "b) SQLAlchemy Core": {
+      "note": "prebuilt Select + bindparam, executed directly",
+      "p10_us": 110.1702,
+      "median_us": 118.583,
+      "p90_us": 142.6997
+    },
+    "c) raw psycopg": {
+      "note": "cur.execute + fetchall on a separate connection",
+      "p10_us": 91.0,
+      "median_us": 99.1455,
+      "p90_us": 124.78689999999999
+    },
+    "d) Layer B generated": {
+      "note": "get_product_by_sku(): cursor + execute + fetchone + dataclass",
+      "p10_us": 92.0,
+      "median_us": 100.4375,
+      "p90_us": 123.91689999999998
+    },
+    "e) hand-written psycopg": {
+      "note": "same SQL, same connection as (d), raw tuple back",
+      "p10_us": 90.25,
+      "median_us": 98.791,
+      "p90_us": 121.58390000000001
+    }
+  }
+}

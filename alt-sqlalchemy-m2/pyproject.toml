@@ -1,0 +1,22 @@
+[project]
+name = "alt-sqlalchemy-m2"
+version = "0.1.0"
+description = "alt-SQLAlchemy M2: code generator for the typed SQL facade proven in M1"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sqlacodegen>=4.0",
+    "sqlalchemy>=2.0,<2.1",
+    "psycopg[binary]",
+]
+
+# SETUP GUARD: this subproject is intentionally NOT part of any parent uv
+# workspace. An empty members list makes this directory its own workspace root
+# so `uv` never walks up into /Users/kanade0404/work/python-sandbox.
+[tool.uv.workspace]
+members = []
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+]

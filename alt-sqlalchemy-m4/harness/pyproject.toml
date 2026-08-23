@@ -1,0 +1,9 @@
+[project]
+name = "alt-sqlalchemy-m4-harness"
+version = "0.1.0"
+description = "Scoring/oracle glue that plugs the M4 Rust engine into the M3 corpus without touching M3"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]",
+]

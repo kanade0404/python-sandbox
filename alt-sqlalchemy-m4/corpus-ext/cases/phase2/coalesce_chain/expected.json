@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": false
+    },
+    {
+      "name": "b",
+      "nullable": false
+    },
+    {
+      "name": "c",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "COALESCE is NULL only when EVERY argument is. `a` ends in a NOT NULL column of the join's preserved side, `b` ends in a literal, and `c` has nothing but nullable arguments. Getting `c` right rules out the shortcut 'COALESCE is never NULL'; getting `a` right rules out 'COALESCE has a nullable argument, therefore nullable'."
+}

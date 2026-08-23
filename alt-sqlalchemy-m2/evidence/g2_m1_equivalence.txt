@@ -1,0 +1,115 @@
+M1 reveal_type expressions : 53
+M2 reveal_type expressions : 71
+present in BOTH            : 53
+  identical revealed type  : 53
+  differing                : 0
+M1 expressions not in M2   : 0
+
+  OK  ORDERS.created_at.lt(_dt.datetime(2026, 1, 1))
+        Pred
+  OK  ORDERS.status.eq(OrderStatus.PAID)
+        Pred
+  OK  ORDERS.status.in_([OrderStatus.PAID, OrderStatus.SHIPPED])
+        Pred
+  OK  ORDERS.total.add(Decimal("1.50"))
+        Expr[Decimal]
+  OK  ORDERS.total.eq(ORDER_ITEMS.unit_price)
+        Pred
+  OK  ORDERS.total.gte(Decimal("10.00"))
+        Pred
+  OK  ORDERS.total.mul(3)
+        Expr[Decimal]
+  OK  ORDERS.total.mul(ORDER_ITEMS.unit_price)
+        Expr[Decimal]
+  OK  ORDERS.total.sub(1)
+        Expr[Decimal]
+  OK  ORDERS.version.eq(3)
+        Pred
+  OK  ORDERS.version.mul(2)
+        Expr[int]
+  OK  all_of()
+        Pred
+  OK  all_of(*bag)
+        Pred
+  OK  any_of()
+        Pred
+  OK  base
+        QOrders
+  OK  col
+        NumCol[Literal['orders'], Decimal]
+  OK  combined
+        Pred
+  OK  conn.statement_cache_stats()
+        tuple[int, int]
+  OK  e
+        Expr[Decimal]
+  OK  first[0]
+        UUID
+  OK  first[11]
+        Decimal | None
+  OK  first[7]
+        str | None
+  OK  li
+        QOrdersUsersI
+  OK  li.users.email
+        Col[Literal['users'], str]
+  OK  ln
+        QOrdersUsersN
+  OK  ln.users.email
+        Col[Literal['users'], str | None]
+  OK  ln.users.id
+        Col[Literal['users'], UUID | None]
+  OK  ln.where(ORDERS.status.eq(OrderStatus.PAID))
+        QOrdersUsersN
+  OK  mixed.order_items.quantity
+        NumCol[Literal['order_items'], int | None]
+  OK  mixed.users.email
+        Col[Literal['users'], str]
+  OK  nullable_email
+        Col[Literal['users'], str | None]
+  OK  proj
+        Projection[OrderSummaryRow]
+  OK  q
+        QOrdersUsersN
+  OK  q.users.id.not_null()
+        Col[Literal['users'], UUID]
+  OK  q.users.status.eq(UserStatus.ACTIVE)
+        Pred
+  OK  q.users.status.not_null()
+        Col[Literal['users'], UserStatus]
+  OK  q.where(all_of())
+        QOrdersUsersN
+  OK  row.order_id
+        UUID
+  OK  row.total
+        Decimal
+  OK  row.user_email
+        str | None
+  OK  rows
+        list[tuple[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, int | None, Decimal | None]]
+  OK  s1.fetch(conn)
+        list[tuple[Decimal]]
+  OK  s2.fetch(conn)
+        list[tuple[UUID, str | None]]
+  OK  s2.sql(conn)
+        str
+  OK  search_orders(OrderFilter())
+        Pred
+  OK  sel
+        Select[UUID, str]
+  OK  sel_i
+        Select[UUID, str]
+  OK  sel_n
+        Select[UUID, str | None]
+  OK  summary
+        list[OrderSummaryRow]
+  OK  thirteen
+        Select[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, UUID | None, int | None, Decimal | None]
+  OK  unnulled
+        Col[Literal['users'], str]
+  OK  unnulled.eq("a@b.example")
+        Pred
+  OK  wide
+        Select[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, int | None, Decimal | None]
+
+G2 EQUIVALENCE: PASS -- every shared claim reveals the same type

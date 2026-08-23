@@ -1,0 +1,7 @@
+{
+  "typeCheckingMode": "strict",
+  "include": ["src/negative_checks.py"],
+  "extraPaths": ["src"],
+  "ignore": ["src/models_pg.py", "src/models_sqlite.py"],
+  "pythonVersion": "3.12"
+}

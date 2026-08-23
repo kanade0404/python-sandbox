@@ -1,0 +1,119 @@
+==============================================================================
+NEGATIVE RUN -- every case below MUST fail to type-check
+==============================================================================
+command: uv run pyright --project pyrightconfig.negative.json
+file   : src/proof_negative.py
+pyright: 1.1.411
+
+EXPECTED CASES : 23  (one `# EXPECT-ERROR` marker each)
+LINES IN ERROR : 23
+TOTAL DIAGS    : 32
+
+The diagnostic count exceeds the case count because pyright emits an
+extra reportUnknownMemberType alongside each reportAttributeAccessIssue.
+check_negative.py asserts the two-way match: every marked line errors,
+and every error lands on a marked line.
+
+==============================================================================
+
+n1_wrong_literal_type   (line 35)
+    code: ORDERS.status.eq("paid")  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "Literal['paid']" cannot be assigned to parameter "other" of type "OrderStatus | Expr[OrderStatus]" in function "eq"
+
+n2_column_vs_column_mismatch   (line 42)
+    code: ORDERS.total.eq(ORDERS.status)  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "Col[_Orders, OrderStatus]" cannot be assigned to parameter "other" of type "Decimal | Expr[Decimal]" in function "eq"
+
+n3_wrong_scalar_type   (line 49)
+    code: ORDERS.version.eq("3")  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "Literal['3']" cannot be assigned to parameter "other" of type "int | Expr[int]" in function "eq"
+
+n4_users_before_join   (line 57)
+    code: q.users.email  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "users" is unknown
+    [reportUnknownMemberType] Type of "email" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "users" for class "QOrders"
+
+n5_left_join_none_bites   (line 66)
+    code: rows[0][1].upper()  # EXPECT-ERROR
+    [reportOptionalMemberAccess] "upper" is not a known attribute of "None"
+
+n6_row_index_out_of_range   (line 75)
+    code: rows[0][2]  # EXPECT-ERROR
+    [reportGeneralTypeIssues] Index 2 is out of range for type tuple[UUID, str | None]
+
+n7_misspelled_column   (line 82)
+    code: ORDERS.totl  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "totl" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "totl" for class "_OrdersCols"
+
+n8_pred_where_col_expected   (line 90)
+    code: from_orders().select(p)  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "Pred" cannot be assigned to parameter "e1" of type "Expr[T1@select]" in function "select"
+
+n9_pred_as_operand   (line 98)
+    code: ORDERS.total.eq(p)  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "Pred" cannot be assigned to parameter "other" of type "Decimal | Expr[Decimal]" in function "eq"
+
+n10_no_reflected_operator   (line 105)
+    code: 3 * ORDERS.total  # EXPECT-ERROR
+    [reportOperatorIssue] Operator "*" not supported for types "Literal[3]" and "NumCol[_Orders, Decimal]"
+
+n11_arithmetic_on_text   (line 113)
+    code: q.users.email.mul(2)  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "mul" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "mul" for class "Col[_Users, str]"
+
+n12_overload_cap   (line 124)
+    code: q.select(  # EXPECT-ERROR
+    [reportCallIssue] No overloads for "select" match the provided arguments
+
+n13_not_null_on_non_null   (line 146)
+    code: ORDERS.total.not_null()  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "not_null" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "not_null" for class "NumCol[_Orders, Decimal]"
+
+n14_undeclared_join   (line 153)
+    code: from_orders().left_join_products()  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "left_join_products" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "left_join_products" for class "QOrders"
+
+n15_inner_join_is_not_nullable   (line 162)
+    code: c: Col[str, str | None] = q.users.email  # EXPECT-ERROR
+    [reportAssignmentType] Type "Col[_Users, str]" is not assignable to declared type "Col[str, str | None]"
+
+n16_projection_row_field_type   (line 172)
+    code: e: str = row.user_email  # EXPECT-ERROR
+    [reportAssignmentType] Type "str | None" is not assignable to declared type "str"
+
+n17_projection_wrong_shape   (line 181)
+    code: from_orders().join_users().select_order_summary()  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "select_order_summary" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "select_order_summary" for class "QOrdersUsersI"
+
+n18_in_wrong_element_type   (line 188)
+    code: ORDERS.status.in_(["paid", "shipped"])  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "list[str]" cannot be assigned to parameter "values" of type "Sequence[OrderStatus]" in function "in_"
+
+n19_row_position_type   (line 197)
+    code: d: Decimal = rows[0][1]  # EXPECT-ERROR
+    [reportAssignmentType] Type "str" is not assignable to declared type "Decimal"
+
+n20_cross_table_mismatch   (line 205)
+    code: ORDERS.id.eq(ORDER_ITEMS.quantity)  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "NumCol[_OrderItems, int]" cannot be assigned to parameter "other" of type "UUID | Expr[UUID]" in function "eq"
+
+n21_where_takes_pred   (line 212)
+    code: from_orders().where(True)  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "Literal[True]" cannot be assigned to parameter "preds" of type "Pred" in function "where"
+
+n22_not_null_narrows_operand   (line 221)
+    code: q.users.id.not_null().eq(u)  # EXPECT-ERROR
+    [reportArgumentType] Argument of type "None" cannot be assigned to parameter "other" of type "UUID | Expr[UUID]" in function "eq"
+
+n23_alias_not_in_shape   (line 229)
+    code: from_users().orders.total  # EXPECT-ERROR
+    [reportUnknownMemberType] Type of "orders" is unknown
+    [reportUnknownMemberType] Type of "total" is unknown
+    [reportAttributeAccessIssue] Cannot access attribute "orders" for class "QUsers"
+

@@ -1,0 +1,79 @@
+EXPECT-ERROR markers : 31
+lines with errors    : 31
+total diagnostics    : 42
+
+OK   L42   n1_wrong_literal_type
+        [reportArgumentType] Argument of type "Literal['paid']" cannot be assigned to parameter "other" of type "OrderStatus | Expr[OrderStatus]" in function "eq"
+OK   L49   n2_column_vs_column_mismatch
+        [reportArgumentType] Argument of type "Col[_TOrders, OrderStatus]" cannot be assigned to parameter "other" of type "Decimal | Expr[Decimal]" in function "eq"
+OK   L56   n3_wrong_scalar_type
+        [reportArgumentType] Argument of type "Literal['3']" cannot be assigned to parameter "other" of type "int | Expr[int]" in function "eq"
+OK   L64   n4_users_before_join
+        [reportUnknownMemberType] Type of "users" is unknown
+        [reportUnknownMemberType] Type of "email" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "users" for class "QOrders"
+OK   L73   n5_left_join_none_bites
+        [reportOptionalMemberAccess] "upper" is not a known attribute of "None"
+OK   L82   n6_row_index_out_of_range
+        [reportGeneralTypeIssues] Index 2 is out of range for type tuple[UUID, str | None]
+OK   L89   n7_misspelled_column
+        [reportUnknownMemberType] Type of "totl" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "totl" for class "_OrdersCols"
+OK   L97   n8_pred_where_col_expected
+        [reportArgumentType] Argument of type "Pred" cannot be assigned to parameter "e1" of type "Expr[T1@select]" in function "select"
+OK   L105  n9_pred_as_operand
+        [reportArgumentType] Argument of type "Pred" cannot be assigned to parameter "other" of type "Decimal | Expr[Decimal]" in function "eq"
+OK   L112  n10_no_reflected_operator
+        [reportOperatorIssue] Operator "*" not supported for types "Literal[3]" and "NumCol[_TOrders, Decimal]"
+OK   L120  n11_arithmetic_on_text
+        [reportUnknownMemberType] Type of "mul" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "mul" for class "Col[_TUsers, str]"
+OK   L131  n12_overload_cap
+        [reportCallIssue] No overloads for "select" match the provided arguments
+OK   L153  n13_not_null_on_non_null
+        [reportUnknownMemberType] Type of "not_null" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "not_null" for class "NumCol[_TOrders, Decimal]"
+OK   L161  n14_undeclared_join
+        [reportUnknownMemberType] Type of "left_join_products" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "left_join_products" for class "QOrders"
+OK   L170  n15_inner_join_is_not_nullable
+        [reportAssignmentType] Type "Col[_TUsers, str]" is not assignable to declared type "Col[str, str | None]"
+OK   L180  n16_projection_row_field_type
+        [reportAssignmentType] Type "str | None" is not assignable to declared type "str"
+OK   L189  n17_projection_wrong_shape
+        [reportUnknownMemberType] Type of "select_order_summary" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "select_order_summary" for class "QOrdersUsersI"
+OK   L196  n18_in_wrong_element_type
+        [reportArgumentType] Argument of type "list[str]" cannot be assigned to parameter "values" of type "Sequence[OrderStatus]" in function "in_"
+OK   L205  n19_row_position_type
+        [reportAssignmentType] Type "str" is not assignable to declared type "Decimal"
+OK   L213  n20_cross_table_mismatch
+        [reportArgumentType] Argument of type "NumCol[_TOrderItems, int]" cannot be assigned to parameter "other" of type "UUID | Expr[UUID]" in function "eq"
+OK   L220  n21_where_takes_pred
+        [reportArgumentType] Argument of type "Literal[True]" cannot be assigned to parameter "preds" of type "Pred" in function "where"
+OK   L229  n22_not_null_narrows_operand
+        [reportArgumentType] Argument of type "None" cannot be assigned to parameter "other" of type "UUID | Expr[UUID]" in function "eq"
+OK   L237  n23_alias_not_in_shape
+        [reportUnknownMemberType] Type of "orders" is unknown
+        [reportUnknownMemberType] Type of "total" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "orders" for class "QUsers"
+OK   L249  n24_undeclared_shape_combination
+        [reportUnknownMemberType] Type of "join_order_items" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "join_order_items" for class "QOrdersUsersI"
+OK   L257  n25_undeclared_shape_prefix_only
+        [reportUnknownMemberType] Type of "join_order_items" is unknown
+        [reportAttributeAccessIssue] Cannot access attribute "join_order_items" for class "QUsersOrdersN"
+OK   L264  n26_assignment_wrong_table
+        [reportArgumentType] Argument of type "Assign[_TUsers]" cannot be assigned to parameter "assigns" of type "Assign[_TOrders]" in function "update_orders"
+OK   L272  n27_insert_missing_required
+        [reportCallIssue] Argument missing for parameter "user_id"
+OK   L279  n28_insert_wrong_type
+        [reportArgumentType] Argument of type "Literal['00000000-0000-0000-0000-000000000000']" cannot be assigned to parameter "user_id" of type "UUID" in function "insert_orders"
+OK   L286  n29_insert_unknown_column
+        [reportCallIssue] No parameter named "nope"
+OK   L295  n30_aggregate_is_nullable
+        [reportAssignmentType] Type "Decimal | None" is not assignable to declared type "Decimal"
+OK   L303  n31_order_by_takes_order
+        [reportArgumentType] Argument of type "Col[_TOrders, datetime]" cannot be assigned to parameter "orders" of type "Order" in function "order_by"
+
+PASS: all 31 negative cases produced errors (42 diagnostics total; pyright emits an extra reportUnknownMemberType alongside each attribute-access error)

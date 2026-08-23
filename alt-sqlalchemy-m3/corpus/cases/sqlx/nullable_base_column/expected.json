@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "text",
+      "nullable": false
+    },
+    {
+      "name": "owner_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/postgres/macros.rs::test_non_null (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "The positive-and-negative control in one query: `id` and `text` are declared NOT NULL and must stay NOT NULL, while `owner_id` has no constraint and must stay nullable. `LIMIT 1` is semantically inert for nullability -- it can only remove rows, never introduce NULLs -- so it is here to check that a row-count-modifying clause does not perturb the answer. An engine that blanket-degrades to nullable would fail the first two columns; one that trusts a sampled row would wrongly call `owner_id` NOT NULL."
+}
