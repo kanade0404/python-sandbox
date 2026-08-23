@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "v",
+      "nullable": false
+    },
+    {
+      "name": "w",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "With an ELSE the CASE is exhaustive, so `v` is NOT NULL. `w` has the same shape but one nullable branch result, which is enough on its own. The pair pins down both halves of the rule: nullable if ANY branch is, or if the ELSE is missing."
+}

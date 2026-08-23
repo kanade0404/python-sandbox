@@ -1,0 +1,61 @@
+# alt-SQLAlchemy M2 -- the generator's only hand-written input.
+#
+# Everything the FOREIGN KEYS already say is derived automatically (both
+# directions of every FK become an edge, and every edge gets an inner and a
+# left single-join shape). This file only has to say the things a schema
+# cannot: which MULTI-EDGE shapes an application actually uses, and which
+# named projections exist.
+#
+# An undeclared multi-edge combination has no combinator method at all, so it
+# is a pyright error rather than a runtime surprise. That is the whole bet:
+# real applications' join shapes are finite and declarable.
+
+[options]
+module     = "facade"
+auto_edges = true
+
+# ---------------------------------------------------------------- shapes
+# Declared 2-edge shapes. Prefixes are added automatically, so declaring
+# orders+users:left+order_items:left also guarantees orders+users:left exists
+# (it already does, as an auto single-edge shape).
+
+[[shape]]
+tables = ["orders", "users:left", "order_items:left"]
+
+[[shape]]
+tables = ["orders", "users:inner", "order_items:left"]
+
+# The revenue-by-user shape: users -> orders -> order_items, all inner.
+[[shape]]
+tables = ["users", "orders:inner", "order_items:inner"]
+
+# Order listing with its items and the paying user.
+[[shape]]
+tables = ["orders", "order_items:left", "products:left"]
+
+# NOTE what is deliberately ABSENT: orders+users:inner+order_items:inner.
+# `from_orders().join_users().join_order_items()` therefore does not exist.
+# See proofs/proof_negative.py N24.
+
+# ----------------------------------------------------------- projections
+
+[[projection]]
+name   = "OrderSummaryRow"
+method = "select_order_summary"
+shape  = ["orders", "users:left"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "user_email", expr = "users.email" },
+    { field = "total",      expr = "orders.total" },
+]
+
+[[projection]]
+name   = "OrderLineRow"
+method = "select_order_lines"
+shape  = ["orders", "order_items:left", "products:left"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "sku",        expr = "products.sku" },
+    { field = "quantity",   expr = "order_items.quantity" },
+    { field = "unit_price", expr = "order_items.unit_price" },
+]

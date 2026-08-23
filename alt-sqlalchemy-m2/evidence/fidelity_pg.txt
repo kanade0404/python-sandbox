@@ -1,0 +1,44 @@
+table.column                   pg data_type                 kind         notnull  default  verdict
+accounts.id                    bigint                       int          True     True     OK
+accounts.kind                  text                         text         True     True     OK
+accounts.label                 text                         text         True     False    OK
+accounts.created_at            timestamp with time zone     timestamptz  True     True     OK
+order_items.order_id           uuid                         uuid         True     False    OK
+order_items.product_id         bigint                       int          True     False    OK
+order_items.quantity           integer                      int          True     False    OK
+order_items.unit_price         numeric                      numeric      True     False    OK
+orders.id                      uuid                         uuid         True     True     OK
+orders.user_id                 uuid                         uuid         True     False    OK
+orders.status                  USER-DEFINED                 enum         True     True     OK
+orders.version                 integer                      int          True     True     OK
+orders.total                   numeric                      numeric      True     True     OK
+orders.created_at              timestamp with time zone     timestamptz  True     True     OK
+payments.id                    bigint                       int          True     True     OK
+payments.order_id              uuid                         uuid         True     False    OK
+payments.method                text                         text         True     False    OK
+payments.amount                numeric                      numeric      True     False    OK
+payments.card_last4            character                    text         False    False    OK
+payments.bank_account          text                         text         False    False    OK
+payments.wallet_provider       text                         text         False    False    OK
+payments.paid_at               timestamp with time zone     timestamptz  True     True     OK
+products.id                    bigint                       int          True     True     OK
+products.sku                   text                         text         True     False    OK
+products.name                  character varying            text         True     False    OK
+products.price                 numeric                      numeric      True     False    OK
+products.tags                  ARRAY                        array        False    False    OK
+products.stock                 integer                      int          True     True     OK
+staff_accounts.id              bigint                       int          True     False    OK
+staff_accounts.employee_no     text                         text         True     False    OK
+staff_accounts.department      text                         text         True     False    OK
+users.id                       uuid                         uuid         True     True     OK
+users.email                    text                         text         True     False    OK
+users.status                   USER-DEFINED                 enum         True     True     OK
+users.metadata                 jsonb                        json         False    False    OK
+users.created_at               timestamp with time zone     timestamptz  True     True     OK
+
+[OK] PG ENUM -> real Python enum
+[OK] numeric -> Decimal
+[OK] timestamptz -> datetime (tz-aware)
+[OK] text[] -> array of text
+
+columns checked: 36; problems: 0

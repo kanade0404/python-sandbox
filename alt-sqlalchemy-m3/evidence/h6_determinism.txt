@@ -1,0 +1,20 @@
+DETERMINISM
+===========
+
+Two generator runs against the SAME live PostgreSQL 16, into two
+different output directories, then a recursive diff:
+
+  $ uv run python -m altsa_sqlgen --url ... --out /tmp/altsa-m3-det1
+  $ uv run python -m altsa_sqlgen --url ... --out /tmp/altsa-m3-det2
+  $ diff -r /tmp/altsa-m3-det1 /tmp/altsa-m3-det2
+  DIFF_EXIT=0          <- empty diff
+
+... and against the checked-in generated/ tree:
+  $ diff -r -x __pycache__ generated /tmp/altsa-m3-det1
+  DIFF_EXIT=0          <- empty diff
+
+What makes it deterministic
+  * .sql files are visited in sorted order, queries in file order
+  * imports are rendered from a SORTED set
+  * nothing read from the clock, the DSN, the hostname or the env
+  * the only inputs are the .sql text and the server's own answers

@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "grp",
+      "nullable": false
+    },
+    {
+      "name": "total",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "The mirror of the previous case: same shape, same GROUP BY, but the aggregated column is nullable, so a group in which every row's `bonus` is NULL yields SUM = NULL. Seeded so that grp=20 is exactly such a group -- the NULL is observed, not hypothetical."
+}

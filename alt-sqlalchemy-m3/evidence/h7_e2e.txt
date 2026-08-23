@@ -1,0 +1,47 @@
+get_order_with_user (:one, JOIN, "email?" override)
+  [ok  ] returns a row
+  [ok  ] id round-trips as UUID
+  [ok  ] numeric -> Decimal -- 42.50
+  [ok  ] enum -> str -- pending
+  [ok  ] overridden email is present at runtime -- 'has-orders@example.com'
+  [ok  ] nullable jsonb column is None
+get_order_with_user with an id that does not exist
+  [ok  ] :one returns None for no rows
+list_orders_left_join_users (:many, LEFT JOIN)
+  [ok  ] one row per (user, order) -- 3 rows
+  [ok  ] the order-less user appears
+  [ok  ] LEFT JOIN: order columns really are None -- order_id=None total=None
+  [ok  ] preserved side is NOT None, as typed
+  [ok  ] the user WITH orders has non-None order columns
+revenue_by_user (:many, aggregate)
+  [ok  ] one row per user (GROUP BY email)
+  [ok  ] SUM over an empty group really is None
+  [ok  ] COUNT is never None at runtime (hence the safe false positive)
+order_stats_for_user ("order_count!" forces NOT NULL)
+  [ok  ] returns a row even with no orders
+  [ok  ] the `!`-overridden count is really not None -- 0
+  [ok  ] the un-overridden SUM is None
+user_email_maybe ("email?" forces nullable)
+  [ok  ] the `?`-overridden column is non-None in practice -- the override costs an is-not-None check the data never needs
+upsert_product (INSERT ... ON CONFLICT ... RETURNING)
+  [ok  ] insert returns the row
+  [ok  ] identity id was assigned -- 1
+  [ok  ] text[] -> list -- ['a', 'b']
+  [ok  ] conflict path returns the row
+  [ok  ] same row was updated
+  [ok  ] stock accumulated -- 7
+  [ok  ] name was replaced
+lock_products_for_update (SELECT ... FOR UPDATE)
+  [ok  ] returns the locked rows -- 1 rows
+  [ok  ] the row lock is actually held -- a second txn could not lock it
+insert_payment (:exec)
+  [ok  ] :exec returns the row count -- 1
+  [ok  ] the `?` parameter accepts None
+transition_order_status (UPDATE ... RETURNING with a version check)
+  [ok  ] the winning transition returns a row
+  [ok  ] version was bumped -- 2
+  [ok  ] status changed
+  [ok  ] the stale transition returns None
+
+34 check(s), 0 failure(s)
+PASS

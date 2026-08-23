@@ -1,0 +1,41 @@
+# Same declarations as joins.toml, minus the shapes that need the `products`
+# edge under a different name. The SQLite schema is logically identical, so the
+# file is identical too -- kept separate only so the two runs cannot influence
+# each other's output paths.
+
+[options]
+module     = "facade"
+auto_edges = true
+
+[[shape]]
+tables = ["orders", "users:left", "order_items:left"]
+
+[[shape]]
+tables = ["orders", "users:inner", "order_items:left"]
+
+[[shape]]
+tables = ["users", "orders:inner", "order_items:inner"]
+
+[[shape]]
+tables = ["orders", "order_items:left", "products:left"]
+
+[[projection]]
+name   = "OrderSummaryRow"
+method = "select_order_summary"
+shape  = ["orders", "users:left"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "user_email", expr = "users.email" },
+    { field = "total",      expr = "orders.total" },
+]
+
+[[projection]]
+name   = "OrderLineRow"
+method = "select_order_lines"
+shape  = ["orders", "order_items:left", "products:left"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "sku",        expr = "products.sku" },
+    { field = "quantity",   expr = "order_items.quantity" },
+    { field = "unit_price", expr = "order_items.unit_price" },
+]

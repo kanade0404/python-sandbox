@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "raw",
+      "nullable": false
+    },
+    {
+      "name": "v",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "NULLIF is the one construct that manufactures a NULL out of two NOT NULL operands: `nullif(x, y)` is NULL exactly when x = y. `raw` and `v` are the same catalog column, so nothing but the expression can tell them apart -- an engine keyed on attribution must report both the same way and will be wrong about one of them. Seeded with a row whose label is '' so the NULL is observed."
+}

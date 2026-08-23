@@ -1,0 +1,10 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    }
+  ],
+  "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "An INNER JOIN never null-extends either side: a result row exists only where a matching pair exists, so `tweet.id` keeps its catalog NOT NULL. The join partner `products` is entirely nullable, which is the point -- a nullable column on the *other* side of an inner join must not contaminate this one. Paired with the LEFT/RIGHT/FULL variants harvested from the same sqlx test, this pins down that the nullability upgrade is driven by the join type and the side, not by the presence of a join at all."
+}

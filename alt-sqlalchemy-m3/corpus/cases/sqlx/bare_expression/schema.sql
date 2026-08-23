@@ -1,0 +1,1 @@
+-- This case needs no tables: the query is a self-contained expression.

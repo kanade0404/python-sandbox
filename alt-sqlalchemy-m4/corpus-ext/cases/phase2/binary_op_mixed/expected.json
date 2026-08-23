@@ -1,0 +1,22 @@
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": false
+    },
+    {
+      "name": "b",
+      "nullable": true
+    },
+    {
+      "name": "c",
+      "nullable": false
+    },
+    {
+      "name": "d",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "PostgreSQL's operators are strict: the result is NULL iff an operand is, and that holds for comparisons too -- `NULL > 0` is NULL, not false. `c` and `d` are the interesting pair, because an engine that types a comparison as 'boolean, therefore non-null' (sqlc's typePredicateList does exactly this for IN/BETWEEN) is UNSOUND on `d`."
+}

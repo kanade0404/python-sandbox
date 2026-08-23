@@ -1,0 +1,74 @@
+wrote generated/orders.py
+wrote generated/overrides.py
+wrote generated/products.py
+wrote generated/__init__.py
+10 quer(ies) in 3 module(s), 42 result column(s)
+
+-- get_order_with_user :one
+   param $1 order_id: UUID
+   col id                       UUID                         catalog=F explain=? override=- -> NOT NULL
+   col status                   str                          catalog=F explain=? override=- -> NOT NULL
+   col total                    Decimal                      catalog=F explain=? override=- -> NOT NULL
+   col version                  int                          catalog=F explain=? override=- -> NOT NULL
+   col created_at               datetime                     catalog=F explain=? override=- -> NOT NULL
+   col user_id                  UUID                         catalog=F explain=? override=- -> NOT NULL
+   col email                    str | None                   catalog=F explain=? override=nullable -> NULL
+   col metadata                 JsonValue | None             catalog=T explain=? override=- -> NULL
+-- list_orders_left_join_users :many
+   param $1 min_total: Decimal
+   col user_id                  UUID                         catalog=F explain=? override=- -> NOT NULL
+   col email                    str                          catalog=F explain=? override=- -> NOT NULL
+   col user_status              str                          catalog=F explain=? override=- -> NOT NULL
+   col order_id                 UUID | None                  catalog=F explain=T override=- -> NULL
+   col total                    Decimal | None               catalog=F explain=T override=- -> NULL
+   col order_status             str | None                   catalog=F explain=T override=- -> NULL
+   col created_at               datetime | None              catalog=F explain=T override=- -> NULL
+-- revenue_by_user :many
+   col email                    str                          catalog=F explain=? override=- -> NOT NULL
+   col revenue                  Decimal | None               catalog=? explain=? override=- -> NULL
+   col order_count              int | None                   catalog=? explain=? override=- -> NULL
+-- transition_order_status :one
+   param $1 new_status: str
+   param $2 order_id: UUID
+   param $3 expected_version: int
+   col id                       UUID                         catalog=F explain=? override=- -> NOT NULL
+   col status                   str                          catalog=F explain=? override=- -> NOT NULL
+   col version                  int                          catalog=F explain=? override=- -> NOT NULL
+   col total                    Decimal                      catalog=F explain=? override=- -> NOT NULL
+   col created_at               datetime                     catalog=F explain=? override=- -> NOT NULL
+-- order_stats_for_user :one
+   param $1 user_id: UUID
+   col order_count              int                          catalog=? explain=? override=notnull -> NOT NULL
+   col total_spent              Decimal | None               catalog=? explain=? override=- -> NULL
+   col last_order_at            datetime | None              catalog=? explain=? override=- -> NULL
+-- user_email_maybe :many
+   col id                       UUID                         catalog=F explain=? override=- -> NOT NULL
+   col email                    str | None                   catalog=F explain=? override=nullable -> NULL
+-- user_email_via_directive :many
+   col id                       UUID                         catalog=F explain=? override=- -> NOT NULL
+   col email                    str | None                   catalog=F explain=? override=nullable -> NULL
+-- upsert_product :one
+   param $1 sku: str
+   param $2 name: str
+   param $3 price: Decimal
+   param $4 tags: list[str | None]
+   param $5 stock: int
+   col id                       int                          catalog=F explain=? override=- -> NOT NULL
+   col sku                      str                          catalog=F explain=? override=- -> NOT NULL
+   col name                     str                          catalog=F explain=? override=- -> NOT NULL
+   col price                    Decimal                      catalog=F explain=? override=- -> NOT NULL
+   col tags                     list[str | None] | None      catalog=T explain=? override=- -> NULL
+   col stock                    int                          catalog=F explain=? override=- -> NOT NULL
+-- lock_products_for_update :many
+   param $1 skus: list[str | None]
+   col id                       int                          catalog=F explain=? override=- -> NOT NULL
+   col sku                      str                          catalog=F explain=? override=- -> NOT NULL
+   col name                     str                          catalog=F explain=? override=- -> NOT NULL
+   col price                    Decimal                      catalog=F explain=? override=- -> NOT NULL
+   col tags                     list[str | None] | None      catalog=T explain=? override=- -> NULL
+   col stock                    int                          catalog=F explain=? override=- -> NOT NULL
+-- insert_payment :exec
+   param $1 order_id: UUID
+   param $2 method: str
+   param $3 amount: Decimal
+   param $4 card_last4: str | None

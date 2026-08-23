@@ -1,0 +1,24 @@
+[project]
+name = "alt-sqlalchemy-m5"
+version = "0.1.0"
+description = "alt-SQLAlchemy M5: integration of Layer A (M2 facade) and Layer B (M3 sqlgen) + benchmarks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sqlacodegen>=4.0",
+    "sqlalchemy>=2.0,<2.1",
+    "psycopg[binary]",
+]
+
+# SETUP GUARD: this subproject is intentionally NOT part of any parent uv
+# workspace. `uv init` DID append a `[tool.uv.workspace]` block naming this
+# directory to /Users/kanade0404/work/python-sandbox/pyproject.toml; that block
+# was removed by hand immediately afterwards, and the empty members list below
+# is what stops uv walking up there again.
+[tool.uv.workspace]
+members = []
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+]

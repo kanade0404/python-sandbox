@@ -1,0 +1,86 @@
+==============================================================================
+POSITIVE RUN -- pyright strict, must be 0 errors
+==============================================================================
+command: uv run pyright --project pyrightconfig.positive.json
+files  : src/facade.py src/_ir.py src/_catalog.py src/_runtime.py
+         src/proof_positive.py src/demo_runtime.py
+pyright: 1.1.411
+
+ERRORS: 0
+
+==============================================================================
+reveal_type() PROBES -- 56 total
+==============================================================================
+
+--- C1 -- operand type checking (the SQLAlchemy `== Any` hole does not exist) 
+  L44   Type of "ORDERS.status.eq(OrderStatus.PAID)" is "Pred"
+  L48   Type of "ORDERS.total.eq(ORDER_ITEMS.unit_price)" is "Pred"
+  L51   Type of "ORDERS.total.gte(Decimal("10.00"))" is "Pred"
+  L52   Type of "ORDERS.version.eq(3)" is "Pred"
+  L53   Type of "ORDERS.created_at.lt(_dt.datetime(2026, 1, 1))" is "Pred"
+  L56   Type of "ORDERS.status.in_([OrderStatus.PAID, OrderStatus.SHIPPED])" is "Pred"
+  L60   Type of "q.users.status.eq(UserStatus.ACTIVE)" is "Pred"
+
+--- C2 -- arithmetic: result type is fixed by the COLUMN, operand order is moot 
+  L71   Type of "ORDERS.total.mul(3)" is "Expr[Decimal]"
+  L72   Type of "ORDERS.total.add(Decimal("1.50"))" is "Expr[Decimal]"
+  L73   Type of "ORDERS.total.sub(1)" is "Expr[Decimal]"
+  L76   Type of "ORDERS.version.mul(2)" is "Expr[int]"
+  L79   Type of "ORDERS.total.mul(ORDER_ITEMS.unit_price)" is "Expr[Decimal]"
+
+--- C3 -- join nullability, precomputed per table alias -------------------
+  L94   Type of "base" is "QOrders"
+  L98   Type of "ln" is "QOrdersUsersN"
+  L99   Type of "ln.users.email" is "Col[Literal['users'], str | None]"
+  L100  Type of "ln.users.id" is "Col[Literal['users'], UUID | None]"
+  L104  Type of "sel_n" is "Select[UUID, str | None]"
+  L108  Type of "li" is "QOrdersUsersI"
+  L109  Type of "li.users.email" is "Col[Literal['users'], str]"
+  L111  Type of "sel_i" is "Select[UUID, str]"
+  L114  Type of "ln.where(ORDERS.status.eq(OrderStatus.PAID))" is "QOrdersUsersN"
+  L118  Type of "mixed.users.email" is "Col[Literal['users'], str]"
+  L119  Type of "mixed.order_items.quantity" is "NumCol[Literal['order_items'], int | None]"
+
+--- C4 -- wide projection: 12 columns, no Any collapse --------------------
+  L144  Type of "wide" is "Select[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, int | None, Decimal | None]"
+  L149  Type of "rows" is "list[tuple[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, int | None, Decimal | None]]"
+  L151  Type of "first[0]" is "UUID"
+  L152  Type of "first[7]" is "str | None"
+  L153  Type of "first[11]" is "Decimal | None"
+  L171  Type of "thirteen" is "Select[UUID, UUID, OrderStatus, Decimal, int, datetime, UUID | None, str | None, UserStatus | None, datetime | None, UUID | None, int | None, Decimal | None]"
+
+--- C5 -- named dataclass projection --------------------------------------
+  L182  Type of "proj" is "Projection[OrderSummaryRow]"
+  L186  Type of "rows" is "list[OrderSummaryRow]"
+  L189  Type of "row.order_id" is "UUID"
+  L190  Type of "row.user_email" is "str | None"
+  L191  Type of "row.total" is "Decimal"
+
+--- C6 -- predicate composition -------------------------------------------
+  L219  Type of "search_orders(OrderFilter())" is "Pred"
+  L222  Type of "all_of()" is "Pred"
+  L223  Type of "any_of()" is "Pred"
+  L233  Type of "combined" is "Pred"
+  L237  Type of "q" is "QOrdersUsersN"
+  L241  Type of "all_of(*bag)" is "Pred"
+
+--- C7 -- not_null() escape hatch via a self-type -------------------------
+  L253  Type of "nullable_email" is "Col[Literal['users'], str | None]"
+  L257  Type of "unnulled" is "Col[Literal['users'], str]"
+  L260  Type of "q.users.id.not_null()" is "Col[Literal['users'], UUID]"
+  L261  Type of "q.users.status.not_null()" is "Col[Literal['users'], UserStatus]"
+  L265  Type of "sel" is "Select[UUID, str]"
+  L269  Type of "unnulled.eq("a@b.example")" is "Pred"
+
+--- C8 -- zero type leakage -----------------------------------------------
+  L283  Type of "s2.fetch(conn)" is "list[tuple[UUID, str | None]]"
+  L286  Type of "s1.fetch(conn)" is "list[tuple[Decimal]]"
+  L289  Type of "ORDERS.status.eq(OrderStatus.PAID)" is "Pred"
+  L290  Type of "q.where(all_of())" is "QOrdersUsersN"
+  L291  Type of "s2.sql(conn)" is "str"
+  L292  Type of "conn.statement_cache_stats()" is "tuple[int, int]"
+  L296  Type of "sel" is "Select[UUID, str | None]"
+  L298  Type of "col" is "NumCol[Literal['orders'], Decimal]"
+  L300  Type of "e" is "Expr[Decimal]"
+  L302  Type of "summary" is "list[OrderSummaryRow]"
+

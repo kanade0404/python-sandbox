@@ -1,0 +1,52 @@
+DETERMINISM + PERF -- altsa-analyze
+==============================================================================
+binary : /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/alt-sqlalchemy-m4/target/release/altsa-analyze
+cases  : 37   determinism runs: 5   perf repeats: 20
+
+case                                              best ms  mean ms  sha256[:16]
+------------------------------------------------------------------------------
+own/aggregate_groupby                                2.23     2.41  e6141b8a0bed09f6
+own/aggregate_no_groupby                             2.15     2.29  f5e6e2e4ec841c78
+own/coalesce_not_null                                2.18     2.34  3236e212f650ec8a
+own/full_join                                        2.16     2.35  9aff1b24c242fe3f
+own/inner_join                                       2.20     2.33  c027f80964cdea9e
+own/left_join_basic                                  2.25     2.46  14329f8a5394f700
+own/left_join_derived_table                          2.31     2.56  24e69422bf06ed39
+own/left_join_lateral                                2.24     2.47  663a3d817973104e
+own/left_join_nested_right                           2.16     2.33  d86f0587984e0995
+own/passthrough_notnull                              2.15     2.35  b92f22ca06b1c298
+sqlx/bare_expression                                 2.16     2.27  d1d2e7d3c7baec38
+sqlx/coalesce_aggregate_notnull                      2.15     2.38  f271f717181949f2
+sqlx/cte_materialized_preserves_nullability          2.20     2.38  8e0d1755aa4c36f4
+sqlx/cte_preserves_nullability                       2.19     2.30  8e0d1755aa4c36f4
+sqlx/full_join_both_nullable                         2.07     2.30  8ad47d588d165afe
+sqlx/inner_join_preserves_notnull                    2.16     2.28  2f1eae153c0c7733
+sqlx/left_join_makes_nullable                        2.05     2.24  122a00c863e17b97
+sqlx/left_join_outer_half_preserved                  2.12     2.35  0f10cb068e051743
+sqlx/nullable_base_column                            2.13     2.28  8e0d1755aa4c36f4
+sqlx/order_by_limit_preserves                        2.10     2.34  0d68661c651ece55
+sqlx/right_join_inverts                              2.10     2.26  6085f69a241043c2
+sqlx/simple_select_star                              2.10     2.26  2e60812a48522360
+sqlx/subquery_preserves_nullability                  2.19     2.34  8e0d1755aa4c36f4
+sqlx/ungrouped_aggregate_nullable                    2.14     2.31  54fab742f9eb00f9
+sqlx/union_all_merges_nullability                    2.14     2.29  6af4d41afcec4d97
+sqlx/values_derived_all_nullable                     2.09     2.21  0e36ee33c6d75539
+phase2/aggregate_sum_groupby_notnull_arg             2.21     2.35  bbea90eae070f664
+phase2/aggregate_sum_groupby_nullable_arg            2.11     2.27  086cdf9984abf53d
+phase2/aggregate_sum_no_groupby                      2.22     2.35  f5e6e2e4ec841c78
+phase2/binary_op_mixed                               2.05     2.22  cf05db5136935872
+phase2/case_no_else                                  2.14     2.36  bfeb97a92d0de8e7
+phase2/case_with_else                                2.21     2.43  ee7592d99d038eb3
+phase2/cast_preserves                                2.18     2.42  6db590e1c4eab131
+phase2/coalesce_chain                                2.15     2.32  4879aa974589ab9b
+phase2/nullif_case                                   2.19     2.31  b6145d1e09844140
+phase2/scalar_subquery                               2.24     2.36  87c30197453bfee3
+phase2/union_nullability                             2.16     2.31  2f031dbbdf767ea5
+------------------------------------------------------------------------------
+process wall time, best-of-20: min 2.05 ms, median 2.16 ms, max 2.31 ms
+process wall time, mean               : min 2.21 ms, median 2.33 ms, max 2.56 ms
+
+in-process breakdown for the slowest case (own/left_join_derived_table):
+    catalog: 0.115 ms  analysis: 0.065 ms
+
+DETERMINISM: PASS -- 37 cases x 5 runs, byte-identical stdout every time

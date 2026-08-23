@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": false
+    },
+    {
+      "name": "b",
+      "nullable": true
+    },
+    {
+      "name": "c",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "A cast is value-preserving for NULL: `NULL::text` is NULL. So a cast must pass its operand's nullability straight through -- `a` stays NOT NULL, `b` stays nullable, `c` folds two literals. sqlc's typeTypeCast (internal/core/analyzer/expr.go:728-742) returns the target type with `nullable` left at its zero value, i.e. false, so it would report `b` as NOT NULL. That is the unsound direction."
+}

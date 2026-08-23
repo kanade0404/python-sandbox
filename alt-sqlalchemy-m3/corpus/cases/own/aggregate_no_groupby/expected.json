@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "total",
+      "nullable": true
+    },
+    {
+      "name": "n",
+      "nullable": false
+    },
+    {
+      "name": "hi",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "An ungrouped aggregate always produces exactly one row, even over an empty table. SUM and MAX of no rows are NULL; COUNT of no rows is 0, never NULL. Phase 1 has no expression-level reasoning, so `n` is expected to come back as a SAFE FALSE POSITIVE -- this is the clearest single instance of the Phase1 -> Phase2 delta."
+}

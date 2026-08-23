@@ -1,0 +1,9 @@
+ENGINE WARNINGS
+========================================================================
+
+sqlx/left_join_makes_nullable
+    VALUES-derived relation: PostgreSQL reports its columns with no base-table attribution, so every column is reported nullable (see corpus sqlx/values_derived_all_nullable)
+
+sqlx/values_derived_all_nullable
+    VALUES-derived relation: PostgreSQL reports its columns with no base-table attribution, so every column is reported nullable (see corpus sqlx/values_derived_all_nullable)
+

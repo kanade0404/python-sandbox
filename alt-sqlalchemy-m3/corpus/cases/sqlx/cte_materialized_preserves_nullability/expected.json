@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "text",
+      "nullable": false
+    },
+    {
+      "name": "owner_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_table_subquery, ported to PostgreSQL as a MATERIALIZED CTE (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "`AS MATERIALIZED` is an optimisation barrier, not a semantic one: the rows handed to the outer query are byte-for-byte the rows of the base table, so the correct nullability is unchanged from the inlined CTE. What does change is the plan -- the CTE becomes a separate CTE Scan node whose output columns carry no base-table attribution -- so an engine that infers purely from the plan may lose the NOT NULL on `id` and `text` and degrade to safe-nullable. Such a degradation would be a SAFE-FALSE-POSITIVE, i.e. a legitimate precision finding rather than a bug, and the expectation stays at the correct answer regardless of which strategy the engine happens to use."
+}

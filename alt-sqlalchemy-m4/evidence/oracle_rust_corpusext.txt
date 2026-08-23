@@ -1,0 +1,55 @@
+CORPUS ORACLE -- engine: altsa-analyze-m4-static
+========================================================================
+
+[OK      ] phase2/aggregate_sum_groupby_notnull_arg  (2 row(s))
+           claimed NOT NULL: grp, total, n
+
+[OK      ] phase2/aggregate_sum_groupby_nullable_arg  (2 row(s))
+           claimed NOT NULL: grp
+           NULLs actually observed (all in nullable-claimed columns): total
+
+[OK      ] phase2/aggregate_sum_no_groupby  (1 row(s))
+           claimed NOT NULL: n
+
+[OK      ] phase2/binary_op_mixed  (3 row(s))
+           claimed NOT NULL: a, c
+           NULLs actually observed (all in nullable-claimed columns): b, d
+
+[OK      ] phase2/case_no_else  (3 row(s))
+           claimed NOT NULL: id
+           NULLs actually observed (all in nullable-claimed columns): v
+
+[OK      ] phase2/case_with_else  (3 row(s))
+           claimed NOT NULL: v
+           NULLs actually observed (all in nullable-claimed columns): w
+
+[OK      ] phase2/cast_preserves  (3 row(s))
+           claimed NOT NULL: a, c
+           NULLs actually observed (all in nullable-claimed columns): b
+
+[OK      ] phase2/coalesce_chain  (3 row(s))
+           claimed NOT NULL: a, b
+           NULLs actually observed (all in nullable-claimed columns): c
+
+[OK      ] phase2/nullif_case  (3 row(s))
+           claimed NOT NULL: raw
+           NULLs actually observed (all in nullable-claimed columns): v
+
+[OK      ] phase2/scalar_subquery  (3 row(s))
+           claimed NOT NULL: id, has_n
+           NULLs actually observed (all in nullable-claimed columns): note
+
+[OK      ] phase2/union_nullability  (5 row(s))
+           claimed NOT NULL: b
+           NULLs actually observed (all in nullable-claimed columns): a
+
+------------------------------------------------------------------------
+SUMMARY
+
+  seeded cases        : 11
+  result rows         : 31
+  NOT NULL assertions : 47 (column x row)
+  violations          : 0
+  errors              : 0
+
+PASS: 0 unsound observation(s), 0 error(s)

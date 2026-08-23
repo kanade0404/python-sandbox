@@ -1,0 +1,30 @@
+G7 DETERMINISM
+==============
+
+Two consecutive generator runs against the SAME live PostgreSQL 16 database,
+into two different output directories, then `diff -r`:
+
+  $ uv run python -m altsa_gen --url postgresql+psycopg://.../ec \
+      --config joins.toml --out /tmp/det1
+  $ uv run python -m altsa_gen --url postgresql+psycopg://.../ec \
+      --config joins.toml --out /tmp/det2
+  $ diff -r /tmp/det1 /tmp/det2
+  DIFF_EXIT=0          <- empty diff
+
+  $ shasum /tmp/det1/facade.py /tmp/det2/facade.py generated/pg/facade.py
+  0a611844c3a2891ffc1f23c3daad0f4ec9a3361d  /tmp/det1/facade.py
+  0a611844c3a2891ffc1f23c3daad0f4ec9a3361d  /tmp/det2/facade.py
+  0a611844c3a2891ffc1f23c3daad0f4ec9a3361d  generated/pg/facade.py
+
+The committed `generated/pg/facade.py` is byte-identical to both fresh runs,
+so the checked-in evidence is exactly what the generator produces.
+
+What makes it deterministic
+---------------------------
+  * no timestamp, no database URL, no host name in the output header
+  * tables iterated in `sorted(metadata.tables)` order
+  * columns in the table's own ordinal order (reflection preserves it)
+  * edges sorted by edge id; enums sorted by class name; shapes sorted by
+    (root, number of steps, class name); `__all__` sorted
+  * `enum_classes` walked as `sorted(front.enum_classes.items())`
+  * every IR collection is a tuple, so nothing can be re-ordered in place

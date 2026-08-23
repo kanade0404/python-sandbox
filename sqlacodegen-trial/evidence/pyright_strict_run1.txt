@@ -1,0 +1,132 @@
+/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/main_pg.py
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/main_pg.py:73:52 - error: Argument type is partially unknown
+    Argument corresponds to parameter "values" in function "print"
+    Argument type is "dict[Unknown, Unknown] | None" (reportUnknownArgumentType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/main_pg.py:73:62 - error: Type of "metadata_" is partially unknown
+    Type of "metadata_" is "dict[Unknown, Unknown] | None" (reportUnknownMemberType)
+/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:69:88 - error: Type of parameter "cls" is unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:69:93 - error: Return type of lambda, "list[Unknown]", is partially unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:69:94 - error: Type of "value" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:69:111 - error: Type of "member" is unknown (reportUnknownVariableType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:71:32 - error: Expected type arguments for generic class "dict" (reportMissingTypeArgument)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:87:90 - error: Type of parameter "cls" is unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:87:95 - error: Return type of lambda, "list[Unknown]", is partially unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:87:96 - error: Type of "value" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_pg.py:87:113 - error: Type of "member" is unknown (reportUnknownVariableType)
+/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:64:90 - error: Type of parameter "cls" is unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:64:95 - error: Return type of lambda, "list[Unknown]", is partially unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:64:96 - error: Type of "value" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:64:113 - error: Type of "member" is unknown (reportUnknownVariableType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:81:92 - error: Type of parameter "cls" is unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:81:97 - error: Return type of lambda, "list[Unknown]", is partially unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:81:98 - error: Type of "value" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:81:115 - error: Type of "member" is unknown (reportUnknownVariableType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:123:96 - error: Type of parameter "cls" is unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:123:101 - error: Return type of lambda, "list[Unknown]", is partially unknown (reportUnknownLambdaType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:123:102 - error: Type of "value" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/models_sqlite.py:123:119 - error: Type of "member" is unknown (reportUnknownVariableType)
+/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:34:21 - information: Type of "stmt" is "Select[Tuple[Users]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:35:21 - information: Type of "session.execute(stmt)" is "Result[Tuple[Users]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:36:21 - information: Type of "user" is "Users | None"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:37:21 - information: Type of "Users.email == email" is "ColumnElement[bool]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:71:21 - information: Type of "lock_stmt" is "Select[Tuple[Products]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:72:21 - information: Type of "locked" is "Sequence[Products]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:99:25 - information: Type of "product.price" is "Decimal"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:100:25 - information: Type of "line_total" is "Decimal"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:138:21 - information: Type of "stmt" is "ReturningInsert[Tuple[Products]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:139:21 - error: Type of "excluded" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:139:21 - error: Type of "price" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:139:21 - information: Type of "stmt.excluded.price" is "Unknown"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:139:26 - error: Cannot access attribute "excluded" for class "ReturningInsert[Tuple[Products]]"
+    Attribute "excluded" is unknown (reportAttributeAccessIssue)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:140:21 - information: Type of "product" is "Products"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:166:59 - error: Argument of type "datetime" cannot be assigned to parameter "clauses" of type "_ColumnExpressionArgument[Any]" in function "tuple_"
+    Type "datetime" is not assignable to type "_ColumnExpressionArgument[Any]"
+      "datetime" is not assignable to "ColumnElement[Any]"
+      "datetime" is incompatible with protocol "_HasClauseElement[Any]"
+        "__clause_element__" is not present
+      "datetime" is not assignable to "SQLCoreOperations[Any]"
+      "datetime" is not assignable to "ExpressionElementRole[Any]"
+      "datetime" is not assignable to "TypedColumnsClauseRole[Any]"
+      Type "datetime" is not assignable to type "() -> ColumnElement[Any]"
+    ... (reportArgumentType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:166:70 - error: Argument of type "UUID" cannot be assigned to parameter "clauses" of type "_ColumnExpressionArgument[Any]" in function "tuple_"
+    Type "UUID" is not assignable to type "_ColumnExpressionArgument[Any]"
+      "UUID" is not assignable to "ColumnElement[Any]"
+      "UUID" is incompatible with protocol "_HasClauseElement[Any]"
+        "__clause_element__" is not present
+      "UUID" is not assignable to "SQLCoreOperations[Any]"
+      "UUID" is not assignable to "ExpressionElementRole[Any]"
+      "UUID" is not assignable to "TypedColumnsClauseRole[Any]"
+      Type "UUID" is not assignable to type "() -> ColumnElement[Any]"
+    ... (reportArgumentType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:172:21 - information: Type of "orders" is "Sequence[Orders]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:173:21 - information: Type of "orders[0].order_items" is "list[OrderItems]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:174:21 - information: Type of "Orders.order_items" is "InstrumentedAttribute[list[OrderItems]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:194:21 - information: Type of "stmt" is "Select[Tuple[Users, Orders]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:195:21 - information: Type of "rows" is "Sequence[Row[Tuple[Users, Orders]]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:196:21 - information: Type of "rows[0][1]" is "Any"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:211:21 - information: Type of "stmt" is "Select[Tuple[Users, Orders | None]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:212:21 - information: Type of "rows" is "Sequence[Row[Tuple[Users, Orders | None]]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:213:21 - information: Type of "rows[0][1]" is "Any"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:230:21 - information: Type of "OrderItems.quantity * OrderItems.unit_price" is "ColumnElement[int]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:231:21 - information: Type of "revenue" is "sum[int]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:232:21 - information: Type of "stmt" is "Select[Tuple[str, int]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:233:21 - information: Type of "rows" is "Sequence[Tuple[str, int]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:234:21 - information: Type of "rows[0][1]" is "int"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:235:12 - error: Type "Sequence[Tuple[str, int]]" is not assignable to return type "Sequence[tuple[str, Decimal]]"
+    "Sequence[Tuple[str, int]]" is not assignable to "Sequence[tuple[str, Decimal]]"
+      Type parameter "_T_co@Sequence" is covariant, but "Tuple[str, int]" is not a subtype of "tuple[str, Decimal]"
+        "Tuple[str, int]" is not assignable to "tuple[str, Decimal]"
+          Tuple entry 2 is incorrect type
+            "int" is not assignable to "Decimal" (reportReturnType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:253:21 - information: Type of "stmt" is "Update"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:254:21 - information: Type of "result" is "Result[Any]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:255:21 - error: Type of "rowcount" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:255:21 - information: Type of "result.rowcount" is "Unknown"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:255:28 - error: Cannot access attribute "rowcount" for class "Result[Any]"
+    Attribute "rowcount" is unknown (reportAttributeAccessIssue)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:256:12 - error: Type of "rowcount" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:256:12 - error: Return type is unknown (reportUnknownVariableType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:256:19 - error: Cannot access attribute "rowcount" for class "Result[Any]"
+    Attribute "rowcount" is unknown (reportAttributeAccessIssue)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:325:21 - information: Type of "payment.method" is "str"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:342:21 - information: Type of "row.method" is "str"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_pg.py:343:21 - information: Type of "row.card_last4" is "str | None"
+/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:49:9 - error: Function "_disable_implicit_begin" is not accessed (reportUnusedFunction)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:54:9 - error: Function "_begin_immediate" is not accessed (reportUnusedFunction)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:64:21 - information: Type of "user" is "Users | None"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:108:21 - information: Type of "order.id" is "str"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:109:21 - information: Type of "order.created_at" is "str"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:139:21 - information: Type of "stmt" is "ReturningInsert[Tuple[Products]]"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:140:21 - information: Type of "product" is "Products"
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:159:59 - error: Argument of type "str" cannot be assigned to parameter "clauses" of type "_ColumnExpressionArgument[Any]" in function "tuple_"
+    Type "str" is not assignable to type "_ColumnExpressionArgument[Any]"
+      "str" is not assignable to "ColumnElement[Any]"
+      "str" is incompatible with protocol "_HasClauseElement[Any]"
+        "__clause_element__" is not present
+      "str" is not assignable to "SQLCoreOperations[Any]"
+      "str" is not assignable to "ExpressionElementRole[Any]"
+      "str" is not assignable to "TypedColumnsClauseRole[Any]"
+      Type "str" is not assignable to type "() -> ColumnElement[Any]"
+    ... (reportArgumentType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:159:70 - error: Argument of type "str" cannot be assigned to parameter "clauses" of type "_ColumnExpressionArgument[Any]" in function "tuple_"
+    Type "str" is not assignable to type "_ColumnExpressionArgument[Any]"
+      "str" is not assignable to "ColumnElement[Any]"
+      "str" is incompatible with protocol "_HasClauseElement[Any]"
+        "__clause_element__" is not present
+      "str" is not assignable to "SQLCoreOperations[Any]"
+      "str" is not assignable to "ExpressionElementRole[Any]"
+      "str" is not assignable to "TypedColumnsClauseRole[Any]"
+      Type "str" is not assignable to type "() -> ColumnElement[Any]"
+    ... (reportArgumentType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:177:12 - error: Type of "rowcount" is unknown (reportUnknownMemberType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:177:12 - error: Return type is unknown (reportUnknownVariableType)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:177:19 - error: Cannot access attribute "rowcount" for class "Result[Any]"
+    Attribute "rowcount" is unknown (reportAttributeAccessIssue)
+  /Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/src/repo_sqlite.py:205:21 - information: Type of "payment.method" is "PaymentsMethod"
+41 errors, 0 warnings, 37 informations

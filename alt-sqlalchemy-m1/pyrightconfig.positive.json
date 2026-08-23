@@ -1,0 +1,15 @@
+{
+  "include": [
+    "src/facade.py",
+    "src/_ir.py",
+    "src/_catalog.py",
+    "src/_runtime.py",
+    "src/proof_positive.py",
+    "src/demo_runtime.py"
+  ],
+  "extraPaths": ["src"],
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "reportMissingTypeStubs": "error",
+  "reportUnnecessaryTypeIgnoreComment": "error"
+}

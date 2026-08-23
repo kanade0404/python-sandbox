@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "label",
+      "nullable": false
+    },
+    {
+      "name": "note",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "The baseline. No joins, no expressions -- every answer comes straight from pg_attribute.attnotnull. If this case ever regresses, pass 1 is broken. The WHERE clause is the common optional-filter idiom, which also exercises a parameter used twice: both occurrences must collapse to one $1 for DESCRIBE and one %(min_id)s for psycopg. The oracle binds it to NULL, so the filter is a no-op and every seeded row is returned as evidence."
+}

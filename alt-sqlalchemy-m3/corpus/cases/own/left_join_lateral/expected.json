@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "b_id",
+      "nullable": true
+    },
+    {
+      "name": "amount",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "LATERAL on the null-extended side. The correlated subquery cannot be flattened, so the plan carries a Subquery/Limit node between the join and the base relation -- a shape where a walker that only looks at the direct child's Output would lose the marking."
+}

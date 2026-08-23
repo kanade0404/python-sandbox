@@ -1,0 +1,14 @@
+{
+  "include": [
+    "../generated",
+    "proof_positive.py",
+    "run_checks.py",
+    "check_negative.py",
+    "e2e.py"
+  ],
+  "extraPaths": [".."],
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "reportMissingTypeStubs": "error",
+  "reportUnnecessaryTypeIgnoreComment": "error"
+}

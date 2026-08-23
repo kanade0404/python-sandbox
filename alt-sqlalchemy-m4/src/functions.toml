@@ -1,0 +1,181 @@
+# altsa-analyze -- hand-curated function nullability table.
+#
+# sqlc ships 2,782 PostgreSQL function signatures and not one nullability
+# annotation, so this file is the cheapest place to beat it. It is compiled
+# into the binary with `include_str!`, so there is nothing to install beside it.
+#
+# Rules
+# -----
+#   scalar:
+#     strict      result is NULL iff some argument is NULL (the usual case:
+#                 PostgreSQL's `proisstrict`)
+#     never_null  result is never NULL, whatever the arguments
+#     nullable    result may be NULL even for non-NULL arguments
+#
+#   aggregate (no OVER clause):
+#     never_null  NULL is impossible even over zero input rows (only COUNT)
+#     grouped     over a GROUP BY, one row per non-empty group, so the result
+#                 is NULL only if the argument can be; with NO GROUP BY the
+#                 single row may summarise zero input rows and is NULL.
+#                 A FILTER clause forces `nullable` regardless -- the filter can
+#                 empty a group.
+#
+#   window (used with OVER):
+#     never_null / nullable, as marked. Any aggregate used as a window function
+#     is treated as `nullable` except COUNT, because a frame can be empty.
+#
+# Anything not listed is nullable, and produces a warning.
+
+[scalar]
+# --- always produce a value ------------------------------------------------
+now = "never_null"
+clock_timestamp = "never_null"
+statement_timestamp = "never_null"
+transaction_timestamp = "never_null"
+timeofday = "never_null"
+current_timestamp = "never_null"
+current_date = "never_null"
+current_time = "never_null"
+localtime = "never_null"
+localtimestamp = "never_null"
+current_user = "never_null"
+session_user = "never_null"
+current_schema = "never_null"
+current_database = "never_null"
+current_catalog = "never_null"
+version = "never_null"
+random = "never_null"
+gen_random_uuid = "never_null"
+uuid_generate_v4 = "never_null"
+pg_backend_pid = "never_null"
+txid_current = "never_null"
+# concat / concat_ws are deliberately NOT strict: they skip NULL arguments and
+# return '' rather than NULL. This is one of the few places where "strict"
+# would be a *false* positive rather than a safe one.
+concat = "never_null"
+concat_ws = "never_null"
+
+# --- strict: NULL in, NULL out --------------------------------------------
+abs = "strict"
+ceil = "strict"
+ceiling = "strict"
+floor = "strict"
+round = "strict"
+trunc = "strict"
+sign = "strict"
+sqrt = "strict"
+power = "strict"
+exp = "strict"
+ln = "strict"
+log = "strict"
+mod = "strict"
+div = "strict"
+upper = "strict"
+lower = "strict"
+initcap = "strict"
+length = "strict"
+char_length = "strict"
+character_length = "strict"
+octet_length = "strict"
+bit_length = "strict"
+btrim = "strict"
+ltrim = "strict"
+rtrim = "strict"
+trim = "strict"
+lpad = "strict"
+rpad = "strict"
+replace = "strict"
+translate = "strict"
+repeat = "strict"
+reverse = "strict"
+left = "strict"
+right = "strict"
+ascii = "strict"
+chr = "strict"
+md5 = "strict"
+encode = "strict"
+decode = "strict"
+to_char = "strict"
+to_number = "strict"
+to_date = "strict"
+to_timestamp = "strict"
+date_trunc = "strict"
+date_part = "strict"
+age = "strict"
+strpos = "strict"
+position = "strict"
+split_part = "strict"
+substr = "strict"
+lower_inc = "strict"
+cardinality = "strict"
+array_to_string = "strict"
+string_to_array = "strict"
+array_append = "strict"
+array_cat = "strict"
+row_to_json = "strict"
+to_json = "strict"
+to_jsonb = "strict"
+jsonb_build_object = "strict"
+json_build_object = "strict"
+jsonb_build_array = "strict"
+json_build_array = "strict"
+
+# --- may be NULL even for non-NULL arguments ------------------------------
+# `substring(x from 'pattern')` returns NULL when the pattern does not match.
+substring = "nullable"
+# array_length of a dimension that does not exist is NULL, and always is for
+# an empty array.
+array_length = "nullable"
+array_position = "nullable"
+nullif = "nullable"
+to_regclass = "nullable"
+to_regtype = "nullable"
+nth_value = "nullable"
+# jsonb_path / -> style accessors return NULL for a missing key.
+jsonb_extract_path = "nullable"
+json_extract_path = "nullable"
+jsonb_path_query_first = "nullable"
+
+[aggregate]
+count = "never_null"
+sum = "grouped"
+avg = "grouped"
+max = "grouped"
+min = "grouped"
+array_agg = "grouped"
+string_agg = "grouped"
+json_agg = "grouped"
+jsonb_agg = "grouped"
+json_object_agg = "grouped"
+jsonb_object_agg = "grouped"
+bool_and = "grouped"
+bool_or = "grouped"
+every = "grouped"
+bit_and = "grouped"
+bit_or = "grouped"
+stddev = "grouped"
+stddev_pop = "grouped"
+stddev_samp = "grouped"
+variance = "grouped"
+var_pop = "grouped"
+var_samp = "grouped"
+corr = "grouped"
+covar_pop = "grouped"
+covar_samp = "grouped"
+mode = "grouped"
+percentile_cont = "grouped"
+percentile_disc = "grouped"
+xmlagg = "grouped"
+
+[window]
+row_number = "never_null"
+rank = "never_null"
+dense_rank = "never_null"
+percent_rank = "never_null"
+cume_dist = "never_null"
+ntile = "never_null"
+lag = "nullable"
+lead = "nullable"
+first_value = "nullable"
+last_value = "nullable"
+nth_value = "nullable"

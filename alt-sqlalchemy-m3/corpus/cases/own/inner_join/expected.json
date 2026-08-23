@@ -1,0 +1,22 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "label",
+      "nullable": false
+    },
+    {
+      "name": "b_id",
+      "nullable": false
+    },
+    {
+      "name": "amount",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "An inner join never null-extends, so the EXPLAIN pass must leave the catalog answers alone. This is the case that catches an over-eager plan walker."
+}

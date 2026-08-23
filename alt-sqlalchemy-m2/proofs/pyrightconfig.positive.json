@@ -1,0 +1,13 @@
+{
+  "include": [
+    "../altsa_runtime",
+    "../generated/pg/facade.py",
+    "proof_positive.py",
+    "run_checks.py"
+  ],
+  "extraPaths": [".."],
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "reportMissingTypeStubs": "error",
+  "reportUnnecessaryTypeIgnoreComment": "error"
+}

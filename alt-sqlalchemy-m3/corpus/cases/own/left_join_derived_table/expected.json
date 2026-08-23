@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "total",
+      "nullable": true
+    },
+    {
+      "name": "n",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "A non-flattenable derived table (it aggregates) on the null-extended side. Both of its columns are nullable in the correct answer -- `total` and `n` are non-null WITHIN a group, but the LEFT JOIN can null-extend the whole subquery row away."
+}

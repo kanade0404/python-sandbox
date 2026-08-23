@@ -1,0 +1,1 @@
+DETERMINISM: PASS -- both layers byte-identical across runs

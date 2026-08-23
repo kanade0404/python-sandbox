@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "note",
+      "nullable": true
+    },
+    {
+      "name": "has_n",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "A scalar subquery that matches no row evaluates to NULL, so `note` is nullable however NOT NULL its source column might be -- and here the source is nullable too. EXISTS is the opposite: it is a total predicate, true or false, never NULL. Seeded with an m that has no n, so the correlated subquery really does come back empty."
+}

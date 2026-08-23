@@ -1,0 +1,142 @@
+== EC schema: sqlacodegen-trial/ddl/postgres.sql ==
+{
+  "functions": 136,
+  "tables": 7,
+  "warnings": []
+}
+
+== probe schema: harness/ddl_probe.sql ==
+-- catalog + warnings (the warnings ARE the unsupported list)
+{
+  "functions": 136,
+  "tables": 5,
+  "warnings": [
+    "catalog: CREATE VIEW child_view is not modelled; queries over it will not resolve",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE inherited uses LIKE, inherited columns are not modelled",
+    "catalog: CREATE FOREIGN TABLE is not modelled",
+    "catalog: ALTER TABLE nonexistent refers to a table this catalog does not hold"
+  ]
+}
+
+-- SELECT * FROM base   (serial / bigserial / identity / enum / generated / check)
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "big",
+      "nullable": false
+    },
+    {
+      "name": "ident",
+      "nullable": false
+    },
+    {
+      "name": "always",
+      "nullable": false
+    },
+    {
+      "name": "required",
+      "nullable": false
+    },
+    {
+      "name": "optional",
+      "nullable": true
+    },
+    {
+      "name": "enum_col",
+      "nullable": false
+    },
+    {
+      "name": "checked",
+      "nullable": true
+    },
+    {
+      "name": "computed",
+      "nullable": true
+    },
+    {
+      "name": "uniq",
+      "nullable": true
+    },
+    {
+      "name": "arr",
+      "nullable": true
+    },
+    {
+      "name": "js",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "catalog: CREATE VIEW child_view is not modelled; queries over it will not resolve",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE inherited uses LIKE, inherited columns are not modelled",
+    "catalog: CREATE FOREIGN TABLE is not modelled",
+    "catalog: ALTER TABLE nonexistent refers to a table this catalog does not hold"
+  ]
+}
+
+-- SELECT * FROM child  (ALTER ADD COLUMN, SET NOT NULL, DROP COLUMN)
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "parent",
+      "nullable": true
+    },
+    {
+      "name": "note",
+      "nullable": false
+    },
+    {
+      "name": "added_required",
+      "nullable": false
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "catalog: CREATE VIEW child_view is not modelled; queries over it will not resolve",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE inherited uses LIKE, inherited columns are not modelled",
+    "catalog: CREATE FOREIGN TABLE is not modelled",
+    "catalog: ALTER TABLE nonexistent refers to a table this catalog does not hold"
+  ]
+}
+
+-- SELECT * FROM composite_pk  (table-level PRIMARY KEY implies NOT NULL)
+{
+  "columns": [
+    {
+      "name": "left_id",
+      "nullable": false
+    },
+    {
+      "name": "right_id",
+      "nullable": false
+    },
+    {
+      "name": "payload",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "catalog: CREATE VIEW child_view is not modelled; queries over it will not resolve",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE AS / MATERIALIZED VIEW is not modelled",
+    "catalog: CREATE TABLE inherited uses LIKE, inherited columns are not modelled",
+    "catalog: CREATE FOREIGN TABLE is not modelled",
+    "catalog: ALTER TABLE nonexistent refers to a table this catalog does not hold"
+  ]
+}

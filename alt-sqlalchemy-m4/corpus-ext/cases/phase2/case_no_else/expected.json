@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "v",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "A CASE with no ELSE yields NULL for every row that matches no WHEN, however non-null the branch results are. Seeded with a zero-amount row so the NULL really appears."
+}

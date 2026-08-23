@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "a_id",
+      "nullable": false
+    },
+    {
+      "name": "total",
+      "nullable": false
+    },
+    {
+      "name": "n",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "With GROUP BY, every emitted group has at least one row, and b.amount is NOT NULL -- so SUM cannot be NULL here. All three columns are non-null in the correct answer. Phase 1 gets `a_id` right from the catalog and is expected to be a safe false positive on the two aggregates."
+}

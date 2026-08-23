@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "b_id",
+      "nullable": true
+    },
+    {
+      "name": "c_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "THE soundness case, and the reason this port deviates from sqlx. PostgreSQL 16 replans this as `Hash Join / Join Type: Right` with the (b JOIN c) subtree as the OUTER child and `a` as the INNER child. sqlx's rule marks the child whose Parent Relationship is \"Inner\" -- which under a Right join is the PRESERVED side -- so it would call a.id nullable (harmless) and b.id/c.id NOT NULL (unsound). Verified against live data: a=2 has no b, and the row really does come back (2, NULL, NULL)."
+}

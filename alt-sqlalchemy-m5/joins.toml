@@ -1,0 +1,85 @@
+# alt-SQLAlchemy M5 -- Layer A generator input for the order service.
+#
+# An M5 COPY of M2's joins.toml, not the file itself: M2 is audited and
+# read-only, and M5's app needs two projections M2's config does not declare.
+# The four declared multi-edge shapes are carried over verbatim so the M5
+# facade is a superset of M2's.
+#
+# Everything the FOREIGN KEYS say is still derived automatically; this file only
+# declares what a schema cannot: multi-edge shapes, and named projections.
+
+[options]
+module     = "facade"
+auto_edges = true
+
+# ---------------------------------------------------------------- shapes
+# Carried over from M2 (prefixes are added automatically).
+
+[[shape]]
+tables = ["orders", "users:left", "order_items:left"]
+
+[[shape]]
+tables = ["orders", "users:inner", "order_items:left"]
+
+[[shape]]
+tables = ["users", "orders:inner", "order_items:inner"]
+
+[[shape]]
+tables = ["orders", "order_items:left", "products:left"]
+
+# ----------------------------------------------------------- projections
+
+# M2's two, unchanged.
+
+[[projection]]
+name   = "OrderSummaryRow"
+method = "select_order_summary"
+shape  = ["orders", "users:left"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "user_email", expr = "users.email" },
+    { field = "total",      expr = "orders.total" },
+]
+
+[[projection]]
+name   = "OrderLineRow"
+method = "select_order_lines"
+shape  = ["orders", "order_items:left", "products:left"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "sku",        expr = "products.sku" },
+    { field = "quantity",   expr = "order_items.quantity" },
+    { field = "unit_price", expr = "order_items.unit_price" },
+]
+
+# M5's two.
+
+# The dynamic order-search result. INNER join: orders.user_id is NOT NULL and
+# FK-constrained, so every order has a user and `user_email` is honestly `str`.
+[[projection]]
+name   = "OrderSearchRow"
+method = "select_order_search"
+shape  = ["orders", "users:inner"]
+columns = [
+    { field = "order_id",   expr = "orders.id" },
+    { field = "user_email", expr = "users.email" },
+    { field = "status",     expr = "orders.status" },
+    { field = "total",      expr = "orders.total" },
+    { field = "created_at", expr = "orders.created_at" },
+]
+
+# The users-with-orders listing. LEFT join, so every `orders.*` field comes out
+# `| None` -- a user with no orders is a row with four Nones, and the generator
+# types it that way without being told.
+[[projection]]
+name   = "UserOrderRow"
+method = "select_user_orders"
+shape  = ["users", "orders:left"]
+columns = [
+    { field = "user_id",    expr = "users.id" },
+    { field = "email",      expr = "users.email" },
+    { field = "order_id",   expr = "orders.id" },
+    { field = "status",     expr = "orders.status" },
+    { field = "total",      expr = "orders.total" },
+    { field = "created_at", expr = "orders.created_at" },
+]

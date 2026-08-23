@@ -1,0 +1,10 @@
+[package]
+name = "pgq_probe"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pg_query = "6"
+
+[profile.release]
+opt-level = 2

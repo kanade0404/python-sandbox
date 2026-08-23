@@ -1,0 +1,10 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "`tweet.id` is a NOT NULL primary key in the catalog, but it sits on the inner (right) side of a LEFT JOIN, so every unmatched left row is null-extended and the column becomes nullable. The join condition is literally `false`, so *no* row ever matches and the NULL is unavoidable. This is the canonical demonstration that catalog nullability is a lower bound only: an engine that reports NOT NULL here is UNSOUND, not merely imprecise."
+}

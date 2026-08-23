@@ -1,0 +1,170 @@
+CORPUS RUNNER -- engine: always-nullable-control
+========================================================================
+
+[SAFE-FALSE-POSITIVE] own/aggregate_groupby
+     * 0. a_id                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. total                  expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 2. n                      expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] own/aggregate_no_groupby
+       0. total                  expected=NULL      got=NULL      via=control   PASS
+     * 1. n                      expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. hi                     expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] own/coalesce_not_null
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. amount                 expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 2. note                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[PASS               ] own/full_join
+       0. x_id                   expected=NULL      got=NULL      via=control   PASS
+       1. x_label                expected=NULL      got=NULL      via=control   PASS
+       2. y_id                   expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] own/inner_join
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. label                  expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 2. b_id                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 3. amount                 expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] own/left_join_basic
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. label                  expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. b_id                   expected=NULL      got=NULL      via=control   PASS
+       3. amount                 expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] own/left_join_derived_table
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       1. total                  expected=NULL      got=NULL      via=control   PASS
+       2. n                      expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] own/left_join_lateral
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       1. b_id                   expected=NULL      got=NULL      via=control   PASS
+       2. amount                 expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] own/left_join_nested_right
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       1. b_id                   expected=NULL      got=NULL      via=control   PASS
+       2. c_id                   expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] own/passthrough_notnull
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. label                  expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. note                   expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/bare_expression
+     * 0. v                      expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] sqlx/coalesce_aggregate_notnull
+     * 0. total                  expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] sqlx/cte_materialized_preserves_nullability
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. text                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. owner_id               expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/cte_preserves_nullability
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. text                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. owner_id               expected=NULL      got=NULL      via=control   PASS
+
+[PASS               ] sqlx/full_join_both_nullable
+       0. id1                    expected=NULL      got=NULL      via=control   PASS
+       1. id2                    expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/inner_join_preserves_notnull
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[PASS               ] sqlx/left_join_makes_nullable
+       0. id                     expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/left_join_outer_half_preserved
+     * 0. id1                    expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       1. id2                    expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/nullable_base_column
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. text                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. owner_id               expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/order_by_limit_preserves
+     * 0. text                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       1. owner_id               expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/right_join_inverts
+       0. id1                    expected=NULL      got=NULL      via=control   PASS
+     * 1. id2                    expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+
+[SAFE-FALSE-POSITIVE] sqlx/simple_select_star
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. created_at             expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 2. text                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       3. owner_id               expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/subquery_preserves_nullability
+     * 0. id                     expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+     * 1. text                   expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       2. owner_id               expected=NULL      got=NULL      via=control   PASS
+
+[PASS               ] sqlx/ungrouped_aggregate_nullable
+       0. total                  expected=NULL      got=NULL      via=control   PASS
+
+[SAFE-FALSE-POSITIVE] sqlx/union_all_merges_nullability
+     * 0. a                      expected=NOT NULL  got=NULL      via=control   SAFE-FALSE-POSITIVE
+       1. b                      expected=NULL      got=NULL      via=control   PASS
+
+[PASS               ] sqlx/values_derived_all_nullable
+       0. id                     expected=unknown   got=NULL      via=control   PASS
+       1. name                   expected=unknown   got=NULL      via=control   PASS
+
+------------------------------------------------------------------------
+SUMMARY
+
+  cases        : 26 (own=10, sqlx=16)
+  columns      : 65
+  PASS                : 29
+  SAFE-FALSE-POSITIVE : 36
+  UNSOUND             : 0
+  MISMATCH            : 0
+  ERROR               : 0
+
+SAFE FALSE POSITIVES (36) -- the Phase1 -> Phase2 precision delta:
+  own/aggregate_groupby                  a_id                 (via control)
+  own/aggregate_groupby                  total                (via control)
+  own/aggregate_groupby                  n                    (via control)
+  own/aggregate_no_groupby               n                    (via control)
+  own/coalesce_not_null                  id                   (via control)
+  own/coalesce_not_null                  amount               (via control)
+  own/coalesce_not_null                  note                 (via control)
+  own/inner_join                         id                   (via control)
+  own/inner_join                         label                (via control)
+  own/inner_join                         b_id                 (via control)
+  own/inner_join                         amount               (via control)
+  own/left_join_basic                    id                   (via control)
+  own/left_join_basic                    label                (via control)
+  own/left_join_derived_table            id                   (via control)
+  own/left_join_lateral                  id                   (via control)
+  own/left_join_nested_right             id                   (via control)
+  own/passthrough_notnull                id                   (via control)
+  own/passthrough_notnull                label                (via control)
+  sqlx/bare_expression                   v                    (via control)
+  sqlx/coalesce_aggregate_notnull        total                (via control)
+  sqlx/cte_materialized_preserves_nullability id                   (via control)
+  sqlx/cte_materialized_preserves_nullability text                 (via control)
+  sqlx/cte_preserves_nullability         id                   (via control)
+  sqlx/cte_preserves_nullability         text                 (via control)
+  sqlx/inner_join_preserves_notnull      id                   (via control)
+  sqlx/left_join_outer_half_preserved    id1                  (via control)
+  sqlx/nullable_base_column              id                   (via control)
+  sqlx/nullable_base_column              text                 (via control)
+  sqlx/order_by_limit_preserves          text                 (via control)
+  sqlx/right_join_inverts                id2                  (via control)
+  sqlx/simple_select_star                id                   (via control)
+  sqlx/simple_select_star                created_at           (via control)
+  sqlx/simple_select_star                text                 (via control)
+  sqlx/subquery_preserves_nullability    id                   (via control)
+  sqlx/subquery_preserves_nullability    text                 (via control)
+  sqlx/union_all_merges_nullability      a                    (via control)
+
+PASS: 0 unsound, 0 mismatch, 0 error, 36 safe-false-positive

@@ -1,0 +1,14 @@
+{
+  "columns": [
+    {
+      "name": "id1",
+      "nullable": false
+    },
+    {
+      "name": "id2",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/postgres/postgres.rs::test_describe_outer_join_nullable (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "Both columns are the same catalog attribute (`tweet.id`, NOT NULL), reached through two aliases of the same table, so the only thing that can distinguish them is which side of the outer join they sit on. `tweet1` is the preserved (left) side and stays NOT NULL; `tweet2` is the inner side and is null-extended. This forces per-relation-instance tracking: an engine that keys nullability on the table or on the column OID rather than on the alias will collapse the two answers into one and get at least one of them wrong."
+}

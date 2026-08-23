@@ -1,0 +1,43 @@
+altsa-analyze -- line counts
+========================================================================
+
+Rust (src/*.rs)
+  file                        total  blank  comment   code   what
+  catalog.rs                    300     19       32    249   DDL -> catalog
+  scope.rs                      394     30       53    311   bind_from + column resolution
+  expr.rs                       333     30       77    226   expression nullability lattice
+  output.rs                     583     34       45    504   projection, star, CTEs, set ops
+  funcs.rs                      113     14        7     92   function-table loader
+  params.rs                     259     21       22    216   ${name} -> $n scanner
+  main.rs                       376     42       10    324   CLI, JSON, integration tests
+                            -------                -------
+  subtotal                     2358                   1922
+
+Data (src/*.toml, embedded)
+  file                        total  blank  comment   code   what
+  functions.toml                181      5       37    139   the function table itself
+                            -------                -------
+  subtotal                      181                    139
+
+Python harness (harness/*.py)
+  file                        total  blank  comment   code   what
+  m3link.py                      49     10        1     38   import M3's corpus package, read-only
+  engine_rust.py                 71     14        0     57   Rust engine as an M3 Engine
+  score.py                      106     16        0     90   runner
+  oracle.py                      55     13        0     42   live-DB oracle
+  determinism_and_perf.py       124     20        1    103   R6
+  delta_table.py                 84     14        0     70   Phase1 vs Phase2 table
+  loc.py                         86     16        0     70   this file
+                            -------                -------
+  subtotal                      575                    470
+
+Rust total                 : 2358 lines (1922 code)
+  of which #[cfg(test)]    : 164 lines
+  non-test Rust            : 2194 lines
+Function table (data)      : 181 lines (139 entries+syntax)
+ENGINE TOTAL (rust + data) : 2539 lines
+
+Python harness             : 575 lines (470 code)
+
+Estimate in the M4 brief   : 2,500 - 3,500 lines of Rust
+Actual                     : 2539 (2194 non-test Rust + 164 test + 181 data)

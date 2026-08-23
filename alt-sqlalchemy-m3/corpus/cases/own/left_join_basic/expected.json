@@ -1,0 +1,22 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "label",
+      "nullable": false
+    },
+    {
+      "name": "b_id",
+      "nullable": true
+    },
+    {
+      "name": "amount",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "The canonical case. b.* is NOT NULL in the catalog and must be upgraded to nullable by the EXPLAIN pass; a.* must NOT be, so this measures precision in both directions at once."
+}

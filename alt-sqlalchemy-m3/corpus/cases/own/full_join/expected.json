@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "x_id",
+      "nullable": true
+    },
+    {
+      "name": "x_label",
+      "nullable": true
+    },
+    {
+      "name": "y_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M3",
+  "notes": "A FULL join null-extends BOTH inputs, so every column is nullable regardless of catalog constraints. The join condition is deliberately unsatisfiable for the seeded data so real NULLs appear on both sides."
+}

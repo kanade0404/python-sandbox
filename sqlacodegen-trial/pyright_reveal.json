@@ -1,0 +1,44 @@
+{
+    "version": "1.1.411",
+    "time": "1787402482103",
+    "generalDiagnostics": [
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/check_mul_static.py",
+            "severity": "information",
+            "message": "Type of \"a\" is \"ColumnElement[int]\"",
+            "range": {
+                "start": {
+                    "line": 5,
+                    "character": 12
+                },
+                "end": {
+                    "line": 5,
+                    "character": 13
+                }
+            }
+        },
+        {
+            "file": "/Users/kanade0404/work/python-sandbox/.claude/worktrees/replicated-floating-hollerith/sqlacodegen-trial/check_mul_static.py",
+            "severity": "information",
+            "message": "Type of \"b\" is \"ColumnElement[Decimal]\"",
+            "range": {
+                "start": {
+                    "line": 7,
+                    "character": 12
+                },
+                "end": {
+                    "line": 7,
+                    "character": 13
+                }
+            }
+        }
+    ],
+    "summary": {
+        "filesAnalyzed": 1,
+        "errorCount": 0,
+        "warningCount": 0,
+        "informationCount": 2,
+        "timeInSec": 0.362
+    }
+}
+

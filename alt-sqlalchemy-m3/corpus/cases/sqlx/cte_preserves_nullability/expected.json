@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "text",
+      "nullable": false
+    },
+    {
+      "name": "owner_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "mirrors sqlx tests/sqlite/describe.rs::it_describes_table_subquery, ported to PostgreSQL as a CTE (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "Same shape as `subquery_preserves_nullability` but written as a CTE. Since PostgreSQL 12 a non-recursive, side-effect-free, singly-referenced CTE is inlined by default, so the plan looks the same as the flattened subquery and the nullability answer is identical to the plain table scan. The pair of cases separates \"understands derived tables\" from \"understands the WITH syntax\"."
+}

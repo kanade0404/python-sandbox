@@ -1,0 +1,22 @@
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "created_at",
+      "nullable": false
+    },
+    {
+      "name": "text",
+      "nullable": false
+    },
+    {
+      "name": "owner_id",
+      "nullable": true
+    }
+  ],
+  "provenance": "sqlx tests/postgres/describe.rs::it_describes_simple (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "Straight scan of a base table with no join and no outer nesting, so every output column inherits its catalog nullability verbatim. `id` is the BIGSERIAL primary key, `created_at` and `text` are declared NOT NULL, and `owner_id` is the one column with no NOT NULL constraint. This is the baseline: an engine that gets this wrong has a catalog-lookup bug, not an inference bug."
+}

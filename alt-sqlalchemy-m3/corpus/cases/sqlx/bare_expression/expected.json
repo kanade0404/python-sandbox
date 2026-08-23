@@ -1,0 +1,10 @@
+{
+  "columns": [
+    {
+      "name": "v",
+      "nullable": false
+    }
+  ],
+  "provenance": "sqlx tests/postgres/describe.rs::it_describes_expression (MIT OR Apache-2.0; Copyright (C) SQLx Contributors, portions Copyright (C) LaunchBadge, LLC)",
+  "notes": "`1::int8 + 10` is a constant folded from two non-null literals by a strict operator, so no database state can make it NULL: the correct answer is NOT NULL. sqlx itself asserts nullable here, and its own comment explains why -- \"postgres cannot infer nullability from an expression\", i.e. the wire protocol's RowDescription carries no attribute attribution for a computed column, so sqlx falls back to the safe answer. Any engine that reasons only from catalog attribution will do the same, which makes this an expected SAFE-FALSE-POSITIVE for Phase 1 rather than a bug. Explicitly aliased `AS v` because a bare expression is reported by PostgreSQL as `?column?`, which is not a usable identifier."
+}

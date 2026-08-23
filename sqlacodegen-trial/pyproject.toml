@@ -1,0 +1,33 @@
+[project]
+name = "sqlacodegen-trial"
+version = "0.1.0"
+description = "sqlalchemy 2.0 + sqlacodegen OLTP evaluation (PostgreSQL / SQLite)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]>=3.3.4",
+    "sqlacodegen>=4.0",
+    "sqlalchemy>=2.0",
+]
+
+# Declaring a workspace here makes this project its own workspace root so that
+# `uv` does not walk up and attach it to the parent sandbox repo's workspace.
+[tool.uv.workspace]
+members = []
+
+[tool.pyright]
+strict = ["src"]
+include = ["src"]
+# negative_checks.py holds deliberate errors; check it separately.
+exclude = ["src/negative_checks.py"]
+# `ignore` suppresses diagnostics *reported in* these files while still using
+# them for inference. The two generated modules are evidence and are left
+# byte-for-byte as sqlacodegen emitted them; their 12 strict errors are
+# recorded in evidence/pyright_strict_run1.txt.
+ignore = ["src/models_pg.py", "src/models_sqlite.py"]
+pythonVersion = "3.12"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.411",
+]

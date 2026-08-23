@@ -1,0 +1,356 @@
+--------------------------------------------------------------
+SQL: SELECT nope FROM m
+{
+  "error": "unknown column \"nope\"",
+  "warnings": []
+}
+(exit 1)
+
+--------------------------------------------------------------
+SQL: SELECT id FROM nosuchtable
+{
+  "error": "relation \"nosuchtable\" is not in the schema (and is not a CTE)",
+  "warnings": []
+}
+(exit 1)
+
+--------------------------------------------------------------
+SQL: SELECT id FROM m JOIN n ON n.m_id = m.id
+{
+  "error": "column reference \"id\" is ambiguous",
+  "warnings": []
+}
+(exit 1)
+
+--------------------------------------------------------------
+SQL: SELECT weird_udf(m.label) AS v FROM m
+{
+  "columns": [
+    {
+      "name": "v",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "function `weird_udf` is not in the nullability table; reporting nullable"
+  ]
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.label FROM m WHERE m.id = ${target}
+{
+  "columns": [
+    {
+      "name": "label",
+      "nullable": false
+    }
+  ],
+  "params": [
+    {
+      "index": 1,
+      "name": "target",
+      "nullable": false
+    }
+  ],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.label FROM m WHERE m.id = ${target} OR ${target} IS NULL
+{
+  "columns": [
+    {
+      "name": "label",
+      "nullable": false
+    }
+  ],
+  "params": [
+    {
+      "index": 1,
+      "name": "target",
+      "nullable": false
+    }
+  ],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT count(*) FILTER (WHERE m.amount > 0) AS c, sum(m.amount) FILTER (WHERE m.amount > 0) AS s FROM m GROUP BY m.grp
+{
+  "columns": [
+    {
+      "name": "c",
+      "nullable": false
+    },
+    {
+      "name": "s",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT sum(m.amount) OVER (PARTITION BY m.grp) AS running, row_number() OVER () AS rn, count(*) OVER () AS c FROM m
+{
+  "columns": [
+    {
+      "name": "running",
+      "nullable": true
+    },
+    {
+      "name": "rn",
+      "nullable": false
+    },
+    {
+      "name": "c",
+      "nullable": false
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.grp, sum(m.amount) AS total FROM m GROUP BY ROLLUP (m.grp)
+{
+  "columns": [
+    {
+      "name": "grp",
+      "nullable": false
+    },
+    {
+      "name": "total",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "GROUP BY GroupingSetRollup emits super-aggregate rows; aggregates are reported nullable as if there were no GROUP BY"
+  ]
+}
+
+--------------------------------------------------------------
+SQL: WITH RECURSIVE t(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM t WHERE n < 5) SELECT n FROM t
+{
+  "columns": [
+    {
+      "name": "n",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "WITH RECURSIVE \"t\": the recursive term is not analysed; every column of this CTE is reported nullable"
+  ]
+}
+
+--------------------------------------------------------------
+SQL: SELECT g FROM generate_series(1, 10) AS g
+{
+  "columns": [
+    {
+      "name": "g",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": [
+    "function scan \"g\" is not modelled; every column it contributes is reported nullable"
+  ]
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.label, x.v FROM m CROSS JOIN LATERAL (SELECT n.note AS v FROM n WHERE n.m_id = m.id) x
+{
+  "columns": [
+    {
+      "name": "label",
+      "nullable": false
+    },
+    {
+      "name": "v",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT greatest(m.bonus, m.amount) AS g, least(m.bonus, m.bonus) AS l FROM m
+{
+  "columns": [
+    {
+      "name": "g",
+      "nullable": false
+    },
+    {
+      "name": "l",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.id IS NULL AS a, m.bonus IS NOT NULL AS b, (m.amount > 0) IS TRUE AS c FROM m
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": false
+    },
+    {
+      "name": "b",
+      "nullable": false
+    },
+    {
+      "name": "c",
+      "nullable": false
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.bonus IS DISTINCT FROM m.amount AS a, m.bonus IN (1, 2) AS b, m.bonus AND true AS c FROM m
+{
+  "columns": [
+    {
+      "name": "a",
+      "nullable": false
+    },
+    {
+      "name": "b",
+      "nullable": true
+    },
+    {
+      "name": "c",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT * FROM m LEFT JOIN n ON n.m_id = m.id
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "label",
+      "nullable": false
+    },
+    {
+      "name": "amount",
+      "nullable": false
+    },
+    {
+      "name": "bonus",
+      "nullable": true
+    },
+    {
+      "name": "grp",
+      "nullable": false
+    },
+    {
+      "name": "id",
+      "nullable": true
+    },
+    {
+      "name": "m_id",
+      "nullable": true
+    },
+    {
+      "name": "note",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: INSERT INTO n (id, m_id, note) VALUES (1, 1, 'x') RETURNING id, note
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "note",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: UPDATE m SET label = 'x' WHERE id = 1 RETURNING id, bonus
+{
+  "columns": [
+    {
+      "name": "id",
+      "nullable": false
+    },
+    {
+      "name": "bonus",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT m.label AS "forced!", m.id AS "soft?" FROM m
+{
+  "columns": [
+    {
+      "name": "forced",
+      "nullable": false
+    },
+    {
+      "name": "soft",
+      "nullable": true
+    }
+  ],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: SELECT 1 AS a; SELECT 2 AS b
+{
+  "error": "expected exactly one statement, found 2",
+  "warnings": []
+}
+(exit 1)
+
+--------------------------------------------------------------
+SQL: SELECT FROM m
+{
+  "columns": [],
+  "params": [],
+  "warnings": []
+}
+
+--------------------------------------------------------------
+SQL: this is not sql
+{
+  "error": "query parse error: Invalid statement: syntax error at or near \"this\"",
+  "warnings": []
+}
+(exit 1)
+

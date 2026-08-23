@@ -1,0 +1,365 @@
+{
+  "cases": [
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "grp",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 1,
+          "name": "total",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 2,
+          "name": "n",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/aggregate_sum_groupby_notnull_arg",
+      "notes": "With a plain GROUP BY, every emitted group holds at least one row, and `m.amount` is NOT NULL -- so SUM over the group cannot be NULL. This is the case that separates 'aggregates are nullable' from 'aggregates are nullable when their input is or their input may be empty'.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "grp",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "total",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/aggregate_sum_groupby_nullable_arg",
+      "notes": "The mirror of the previous case: same shape, same GROUP BY, but the aggregated column is nullable, so a group in which every row's `bonus` is NULL yields SUM = NULL. Seeded so that grp=20 is exactly such a group -- the NULL is observed, not hypothetical.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 0,
+          "name": "total",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 1,
+          "name": "n",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 2,
+          "name": "hi",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/aggregate_sum_no_groupby",
+      "notes": "An ungrouped aggregate emits exactly one row even over an empty table. SUM and MAX of zero rows are NULL; COUNT of zero rows is 0. The whole row is decided by the function, not by any column's catalog entry, which is precisely what an EXPLAIN-driven engine cannot see.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "a",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "b",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 2,
+          "name": "c",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 3,
+          "name": "d",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/binary_op_mixed",
+      "notes": "PostgreSQL's operators are strict: the result is NULL iff an operand is, and that holds for comparisons too -- `NULL > 0` is NULL, not false. `c` and `d` are the interesting pair, because an engine that types a comparison as 'boolean, therefore non-null' (sqlc's typePredicateList does exactly this for IN/BETWEEN) is UNSOUND on `d`.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "v",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/case_no_else",
+      "notes": "A CASE with no ELSE yields NULL for every row that matches no WHEN, however non-null the branch results are. Seeded with a zero-amount row so the NULL really appears.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "v",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "w",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/case_with_else",
+      "notes": "With an ELSE the CASE is exhaustive, so `v` is NOT NULL. `w` has the same shape but one nullable branch result, which is enough on its own. The pair pins down both halves of the rule: nullable if ANY branch is, or if the ELSE is missing.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "a",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "b",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 2,
+          "name": "c",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/cast_preserves",
+      "notes": "A cast is value-preserving for NULL: `NULL::text` is NULL. So a cast must pass its operand's nullability straight through -- `a` stays NOT NULL, `b` stays nullable, `c` folds two literals. sqlc's typeTypeCast (internal/core/analyzer/expr.go:728-742) returns the target type with `nullable` left at its zero value, i.e. false, so it would report `b` as NOT NULL. That is the unsound direction.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "a",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 1,
+          "name": "b",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 2,
+          "name": "c",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/coalesce_chain",
+      "notes": "COALESCE is NULL only when EVERY argument is. `a` ends in a NOT NULL column of the join's preserved side, `b` ends in a literal, and `c` has nothing but nullable arguments. Getting `c` right rules out the shortcut 'COALESCE is never NULL'; getting `a` right rules out 'COALESCE has a nullable argument, therefore nullable'.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "raw",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "v",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/nullif_case",
+      "notes": "NULLIF is the one construct that manufactures a NULL out of two NOT NULL operands: `nullif(x, y)` is NULL exactly when x = y. `raw` and `v` are the same catalog column, so nothing but the expression can tell them apart -- an engine keyed on attribution must report both the same way and will be wrong about one of them. Seeded with a row whose label is '' so the NULL is observed.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 0,
+          "name": "id",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 1,
+          "name": "note",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 2,
+          "name": "has_n",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/scalar_subquery",
+      "notes": "A scalar subquery that matches no row evaluates to NULL, so `note` is nullable however NOT NULL its source column might be -- and here the source is nullable too. EXISTS is the opposite: it is a total predicate, true or false, never NULL. Seeded with an m that has no n, so the correlated subquery really does come back empty.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    },
+    {
+      "columns": [
+        {
+          "detail": "",
+          "expected": "NULL",
+          "got": "NULL",
+          "how": "static",
+          "index": 0,
+          "name": "a",
+          "verdict": "PASS"
+        },
+        {
+          "detail": "",
+          "expected": "NOT NULL",
+          "got": "NOT NULL",
+          "how": "static",
+          "index": 1,
+          "name": "b",
+          "verdict": "PASS"
+        }
+      ],
+      "error": null,
+      "id": "phase2/union_nullability",
+      "notes": "A set operation merges positionally and a column is nullable exactly when ANY branch's is. `a` pairs a NOT NULL column with a nullable one and must come out nullable; `b` pairs two non-null expressions and must NOT. An engine that inspects only the leading branch -- sqlc returns `c.outputColumns(qc, n.Larg)` and never looks at Rarg -- calls `a` NOT NULL, which is unsound, and is right about `b` by accident.",
+      "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+      "verdict": "PASS"
+    }
+  ],
+  "engine": "altsa-analyze-m4-static"
+}

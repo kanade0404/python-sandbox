@@ -1,0 +1,7 @@
+{
+  "include": ["src/proof_negative.py"],
+  "extraPaths": ["src"],
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "reportUnusedExpression": "none"
+}

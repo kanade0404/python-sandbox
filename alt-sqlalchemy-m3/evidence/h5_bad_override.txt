@@ -1,0 +1,3 @@
+$ uv run python -m altsa_sqlgen --queries proofs/bad_queries --out /tmp/altsa-m3-bad
+error: bad_override.sql / query 'bad_override': OVERRIDE names column 'emial', which this query does not return. Result columns are: 'id', 'email'
+EXIT=2

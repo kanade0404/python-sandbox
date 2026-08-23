@@ -1,0 +1,22 @@
+checked 18 app-level signature(s) across 5 modules
+
+foreign types reachable from an app signature:
+  altsa_runtime.conn.Conn                  ALLOWED (the seam)
+      app.queries.latest_order_per_user.conn
+      app.queries.list_users_with_orders.conn
+      app.queries.revenue.conn
+      app.queries.revenue_by_user.conn
+      ... and 2 more
+  altsa_runtime.expr.Expr                  ALLOWED (the seam)
+      app.compat.enum_operand.return
+  altsa_runtime.expr.Pred                  ALLOWED (the seam)
+      app.queries.OrderSearch.predicates.return
+  psycopg.Connection                       ALLOWED (the seam)
+      app.commands.create_order.conn
+      app.commands.pay.conn
+      app.commands.register.conn
+      app.commands.transition.conn
+      ... and 3 more
+
+0 `Any`, 0 unexpected foreign types
+PASS

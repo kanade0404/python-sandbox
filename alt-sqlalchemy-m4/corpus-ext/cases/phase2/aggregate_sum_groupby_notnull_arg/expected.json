@@ -1,0 +1,18 @@
+{
+  "columns": [
+    {
+      "name": "grp",
+      "nullable": false
+    },
+    {
+      "name": "total",
+      "nullable": false
+    },
+    {
+      "name": "n",
+      "nullable": false
+    }
+  ],
+  "provenance": "hand-written for alt-SQLAlchemy M4 (corpus-ext): the expression-level nullability Phase 1 structurally cannot see",
+  "notes": "With a plain GROUP BY, every emitted group holds at least one row, and `m.amount` is NOT NULL -- so SUM over the group cannot be NULL. This is the case that separates 'aggregates are nullable' from 'aggregates are nullable when their input is or their input may be empty'."
+}
