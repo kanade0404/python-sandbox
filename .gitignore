@@ -194,3 +194,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# Downloaded datasets
+hands-on-generative-ai-with-transformers-and-diffusion-models/chapter3/data/
+
+
+# Playwright MCP output
+.playwright-mcp/
